@@ -7,12 +7,11 @@ import './Home.css';
 
 const Home = (props) => {
     const handleFeed = (event) => {
-        console.log(props.userId);
-        axios.get(`http://localhost:5000/feed?id=${props.userId}`, {
-
-        })
+        axios.get(`http://localhost:5000/feed/id=${props.userId}`)
         .then(res => {
-            console.log(res);
+            for (let i = 0; i < res.data.numPosts; ++i) {
+                
+            }
         }).catch(err => {
             console.log(err);
         });

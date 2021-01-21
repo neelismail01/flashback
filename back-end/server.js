@@ -48,28 +48,32 @@ app.post('/post', (req, res) => {
     })
 })
 
-app.get('/feed:id', (req, res) => {
-    console.log(req)
-    
+app.get('/feed/:id', (req, res) => {
+
     knex('posts').where({
-        'user_id': req.params.id
+        'user_id': parseInt(req.params.id.substring(3))
     })
     .select('img_path')
     .then(paths => {
-        console.log(paths);
-        paths.map(path => {
-            return 'public/uploads/' + path;
-        });
-        
-        for (let i = 0; i < paths.length; ++i) {
-            express.static(__dirname, paths[i])
-        }
+        return res.json({numPosts: paths.length});
     })
     .catch(err => {
-        console.log(err);
+        console.log("err");
     });
-    
-    return res.status(200).send("Images retrieved");
+})
+
+app.get('/feed/:id/:postNum', (req, res) => {
+
+    knex('posts').where({
+        'user_id': parseInt(req.params.id.substring(3))
+    })
+    .select('img_path')
+    .then(paths => {
+        return res.json({numPosts: paths.length});
+    })
+    .catch(err => {
+        console.log("err");
+    });
 })
 
 app.listen(5000, () => console.log(`Server listening on Port 5000`));
