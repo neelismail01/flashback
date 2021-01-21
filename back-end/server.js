@@ -65,7 +65,7 @@ app.get('/feed/:id', (req, res) => {
 app.get('/feed/:id/:postNum', (req, res) => {
 
     knex('posts').where({
-        'user_id': parseInt(req.params.id.substring(3))
+        'user_id': parseInt(req.params.id.substring(3)),
     })
     .select('img_path')
     .then(paths => {
