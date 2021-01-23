@@ -6,7 +6,7 @@ import Home from './components/Home/Home';
 import './App.css';
 
 const App = () => {
-  const [user, setUser] = useState( { id: 1 } );
+  const user = {id: 1};
   const [url, setUrl] = useState('/home');
   const [isSignedIn, setIsSignedIn] = useState(true);
 

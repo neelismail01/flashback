@@ -3,24 +3,12 @@ import './Feed.css';
 
 const Feed = (props) => {
 
+  const imgUrl = `http://localhost:5000/uploads/${props.imgPath}`;
+  console.log(imgUrl);
+
   return (
       <div className="feed-container">
-        <table>
-          <thead>
-            <tr>
-              <td className="name-of-poster">
-                Neel posted:
-              </td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td className="post-text">
-                
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <img src={imgUrl} alt={props.imgPath} />
       </div>
   );
 }
