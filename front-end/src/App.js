@@ -30,7 +30,6 @@ const App = () => {
       isSignedIn === true
       ? (
         <div>
-          <Navigation isSignedIn={isSignedIn} onRouteChange={handleRouteChange} />
           <Home userId={user.id} />
         </div>
         )

@@ -32,13 +32,21 @@ const upload = multer({ storage: storage }).single('file');
 
 app.post('/post', (req, res) => {
     upload(req, res, err => {
+        console.log(req.body);
         if (err instanceof multer.MulterError) {
             return res.status(500).json(err);
         } else if (err) {
             return res.status(500).json(err);
         }
-        
-        knex.insert({user_id: 1, img_path: req.file.originalname})
+
+        knex.insert({
+            user_id: 1,
+            img_path: req.file.originalname,
+            who: req.body.who,
+            location: req.body.where,
+            time_of_memory: req.body.when,
+            what: req.body.what
+        })
         .into("posts")
         .returning("*")
         .then(rows => {
@@ -55,7 +63,8 @@ app.get('/feed/:id', (req, res) => {
     knex('posts').where({
         'user_id': parseInt(req.params.id.substring(3))
     })
-    .select('img_path')
+    .select('img_path', 'who', 'location', 'time_of_memory', 'what')
+    .orderBy('post_id', 'desc')
     .then(paths => {
         for (let i = 0; i < paths.length; ++i) {
             if (paths[i].img_path === null) {
