@@ -31,10 +31,11 @@ const Post = (props) => {
         }
     }
 
-    const handleFormSubmit = async event => {
+    const handleFormSubmit = event => {
         event.preventDefault();
-        console.log(where);
         const data = new FormData();
+        console.log(props.userId)
+        data.append('userId', props.userId);
         data.append('file', file);
         data.append('who', who);
         data.append('where', where);
@@ -64,14 +65,16 @@ const Post = (props) => {
                                 <p>File Not Selected</p>
                             }
                         </div>
+                        <div className="detail-inputs">
+                            <input className="file-details" type="text" placeholder="Who" name="who" onChange={handleDetails} />
+                            <input className="file-details" type="text" placeholder="Where" name="where" onChange={handleDetails} />
+                        </div>
+                        <div className="detail-inputs">
+                            <input className="file-details" type="date" placeholder="When" name="when" onChange={handleDetails} />
+                            <input className="file-details" type="text" placeholder="What" name="what" onChange={handleDetails} />
+                        </div>
                     </div>
-                    <input className="file-details" type="text" placeholder="Who" name="who" onChange={handleDetails} />
-                    <input className="file-details" type="text" placeholder="Where" name="where" onChange={handleDetails} />
-                    <input className="file-details" type="date" placeholder="When" name="when" onChange={handleDetails} />
-                    <input className="file-details" type="text" placeholder="What" name="what" onChange={handleDetails} />
-                    <button className="submit" onClick={handleFormSubmit} >
-                        Add Memory
-                    </button>
+                    <button className="submit" onClick={handleFormSubmit}>Add Memory</button>
                 </form>
             </div>
     );

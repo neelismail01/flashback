@@ -1,17 +1,19 @@
 .home {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
-.post-search {
-    width: 25%;
+.post {
+    margin: 10px 0;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
+    width: 95%;
 }
 
 .feed {
-    width: 75%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: left;
     flex-wrap: wrap;
 }

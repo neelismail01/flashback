@@ -17,16 +17,19 @@ const Feed = (props) => {
   console.log(when)
   console.log(what)
 
-
-  return (
-      <div className="feed-container">
-        <img src={imgUrl} alt={props.imgPath} />
+  /*
         <div className="details">
           {who && <p className="fact">{who}</p>}
           {where && <p className="fact">{where}</p>}
           {when && <p className="fact">{when}</p>}
           {what && <p className="fact">{what}</p>}
         </div>
+  */
+
+
+  return (
+      <div className="feed-container">
+        <img src={imgUrl} alt={props.imgPath} />
       </div>
   );
 }

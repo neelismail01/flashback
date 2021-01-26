@@ -1,0 +1,10 @@
+.home-container {
+    display: flex;
+    justify-content: center;
+}
+
+.sidebar {
+    width: 25%;
+    height: 100vh;
+    background-color: #00baf7;
+}

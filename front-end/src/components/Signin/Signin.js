@@ -29,7 +29,7 @@ const Signin = (props) => {
             if (response.ok) {
                 const json = await response.json();
                 props.onRouteChange('home');
-                props.onSuccessfulSignIn(json.username);
+                props.onSuccessfulSignin(json.user_id);
                 console.log('User successfully signed in');
             } else {
                 console.log('Unable to sign in user');

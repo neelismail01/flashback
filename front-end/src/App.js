@@ -3,10 +3,11 @@ import Register from './components/Register/Register';
 import Signin from './components/Signin/Signin';
 import Navigation from './components/Navigation/Navigation';
 import Home from './components/Home/Home';
+import Sidebar from './components/Sidebar/Sidebar';
 import './App.css';
 
 const App = () => {
-  const user = {id: 1};
+  const [user, setUser] = useState({id: 2});
   const [url, setUrl] = useState('/home');
   const [isSignedIn, setIsSignedIn] = useState(true);
 
@@ -24,18 +25,27 @@ const App = () => {
     }
   }
 
+  const handleSuccessfulSignin = (userId) => {
+    setUser({id: userId})
+    setIsSignedIn(true);
+  }
+
   return (
     <div>
       {
       isSignedIn === true
       ? (
-        <div>
-          <Home userId={user.id} />
+        <div className="home-container">
+          <Sidebar className="sidebar"/>
+          <div className="nav-home">
+            <Navigation onRouteChange={handleRouteChange} />
+            <Home userId={user.id}  />
+          </div>
         </div>
         )
       : (
         url === '/signin'
-        ? <Signin onRouteChange={handleRouteChange} />
+        ? <Signin onRouteChange={handleRouteChange} onSuccessfulSignin={handleSuccessfulSignin} />
         : <Register onRouteChange={handleRouteChange} />
         )
       }

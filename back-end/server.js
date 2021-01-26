@@ -2,6 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const cors = require('cors');
+const bcrypt = require('bcrypt')
 const bodyParser = require('body-parser');
 const knex = require('knex')({
     client: 'pg',
@@ -18,6 +19,67 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.use('/', express.static(path.join(__dirname, '/public')));
+
+app.post('/signin', (req, res) => {
+    const {username, password} = req.body;
+
+    knex('users').where({
+        user_name: username
+    })
+    .select('user_id', 'password')
+    .then(rows => {
+        console.log(rows)
+        bcrypt.compare(password, rows[0].password)
+        .then(response => {
+            if (response) {
+                console.log("Password matched");
+                return res.status(200).send({
+                    user_id: rows[0].user_id
+                })
+            } else {
+                console.log("Password doesn't match")
+                return res.status(400).send("Password doesn't match");
+            }
+        })
+        .catch(err => console.log(err))
+    })
+    .catch(err => console.log(err))
+});
+
+app.post('/register', (req, res) => {
+    const {username, email, password} = req.body;
+
+    knex('users').where({
+        'user_name': username
+    })
+    .select('*')
+    .then(rows => {
+        if (rows.length > 0) {
+            console.log('Account already exists');
+            return res.status(400).send('Account already exists')
+        } else {
+            bcrypt.hash(password, 10, (err, hash) => {
+                if (err) {
+                    console.log(err);
+                    return res.status(400).send('Error creating password');
+                }
+
+                knex.insert({
+                    user_name: username,
+                    email: email,
+                    password: hash
+                })
+                .into("users")
+                .returning("*")
+                .then(rows => {
+                    console.log(rows[0]);
+                })
+            })
+            .catch(err => console.log(err));
+        }
+    })
+    .catch(err => console.log(err));
+});
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -40,7 +102,7 @@ app.post('/post', (req, res) => {
         }
 
         knex.insert({
-            user_id: 1,
+            user_id: req.body.userId,
             img_path: req.file.originalname,
             who: req.body.who,
             location: req.body.where,
@@ -51,11 +113,10 @@ app.post('/post', (req, res) => {
         .returning("*")
         .then(rows => {
             console.log(rows[0]);
+            console.log("File successfully uploaded");
+            return res.status(200).send("File successfully uploaded");
         })
         .catch(err => console.log(err));
-
-        console.log("File successfully uploaded");
-        return res.status(200).send("File successfully uploaded");
     })
 })
 
