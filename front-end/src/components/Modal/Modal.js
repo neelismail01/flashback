@@ -43,6 +43,7 @@ const Modal = (props) => {
         data.append('what', what);
         axios.post('http://localhost:5000/post', data)
         .then(res => {
+            setFileSelected(false);
             console.log(res.statusText);
         })
         .catch(err => {
@@ -51,6 +52,7 @@ const Modal = (props) => {
     }
 
     const closeModal = event => {
+        setFileSelected(false);
         props.closeModal()
         console.log("in modal component");
     }
@@ -61,34 +63,30 @@ const Modal = (props) => {
             <div className="modal">
                 <div className="modal-card">
                     <form>
-                        <div className="file-container">
-                            <div className="select-file">
-                                <input type="file" id="file" className="file" onChange={handleFileInput} />
-                                <label htmlFor="file">Upload an Image</label>
-                            </div>
-                            <div className="file-name">
-                                {
-                                    fileSelected
-                                    ?
-                                    <p>{file.name}</p>
-                                    :
-                                    <p>File Not Selected</p>
-                                }
-                            </div>
-                            <div className="detail-inputs">
-                                <input className="file-details" type="text" placeholder="Who" name="who" onChange={handleDetails} />
-                                <input className="file-details" type="text" placeholder="Where" name="where" onChange={handleDetails} />
-                            </div>
-                            <div className="detail-inputs">
-                                <input className="file-details" type="date" placeholder="When" name="when" onChange={handleDetails} />
-                                <input className="file-details" type="text" placeholder="What" name="what" onChange={handleDetails} />
-                            </div>
+                        <input type="file" id="file" className="file" onChange={handleFileInput} />
+                        <label className="upload-label" htmlFor="file" value="Upload an Image">Upload an Image</label>
+                        <div>
+                            {
+                                fileSelected
+                                ?
+                                <p>{file.name}</p>
+                                :
+                                <p>File Not Selected</p>
+                            }
+                        </div>
+                        <div className="detail-inputs">
+                            <input className="file-details" type="text" placeholder="Who" name="who" onChange={handleDetails} />
+                            <input className="file-details" type="text" placeholder="Where" name="where" onChange={handleDetails} />
+                        </div>
+                        <div className="detail-inputs">
+                            <input className="file-details" type="date" placeholder="When" name="when" onChange={handleDetails} />
+                            <input className="file-details" type="text" placeholder="What" name="what" onChange={handleDetails} />
                         </div>
                         <button className="submit" onClick={handleFormSubmit}>Add Memory</button>
                     </form>
                     <input
                         type="button"
-                        value="Upload Memory"
+                        value="Close"
                         className="upload"
                         onClick={closeModal}
                     />

@@ -1,15 +1,18 @@
 .modal {
-    position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: black;
+    background-color: rgba(0,0,0,0.75); /* Black w/ opacity */
 }
 
 .modal-card {
     background-color: white;
-    opacity: 100%;
-    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 10px;
 }
 
 form {
@@ -26,30 +29,24 @@ form {
     position: absolute;
 }
 
-.file-container label {
-    display: block;
-    position: relative;
+.upload-label {
     width: 200px;
     height: 50px;
     margin: 2px 0;
-    border: solid 1px transparent;
+    border: solid 1px #006399;
     border-radius: 5px;
-    color: #fff;
+    color: #006399;
     font-size: 1rem;
     font-weight: bold;
     transition: transform .2s ease-out;
-
-    box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
-
     cursor: pointer;
 }
 
-.file-container label:hover {
-    transform: scale(1.05);
+.upload-label:hover {
+    transform: scale(0.95);
 }
 
 .file-name {
@@ -64,9 +61,9 @@ form {
 
 .file-details {
     padding: 10px;
-    margin: 1rem 0rem;;
+    margin: 1rem;
     outline: none;
-    border: none;
+    border: 1px solid;
     border-radius: 5px;
     box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
 }
@@ -82,10 +79,24 @@ form {
     color: #fff;
     font-size: 1rem;
     font-weight: bold;
-    background: linear-gradient(40deg, #ff6ec4, #7873f5);
+    background-color: #006399;
     transition: transform .2s ease-out;
 }
 
 .submit:hover {
-    transform: scale(1.05);
+    transform: scale(0.95);
 }
+
+.upload {
+    margin: 0.8rem;
+    border: 1px solid #006399;
+    color: #006399;
+    background-color: white;
+    border-radius: 5px;
+    transition: transform .2s ease-out;
+}
+
+.upload:hover {
+    transform: scale(0.95);
+}
+
