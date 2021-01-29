@@ -87,7 +87,7 @@ form {
     transform: scale(0.95);
 }
 
-.upload {
+.upload-close {
     margin: 0.8rem;
     border: 1px solid #006399;
     color: #006399;
@@ -96,7 +96,7 @@ form {
     transition: transform .2s ease-out;
 }
 
-.upload:hover {
+.upload-close:hover {
     transform: scale(0.95);
 }
 

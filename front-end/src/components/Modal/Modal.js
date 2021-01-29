@@ -87,7 +87,7 @@ const Modal = (props) => {
                     <input
                         type="button"
                         value="Close"
-                        className="upload"
+                        className="upload-close"
                         onClick={closeModal}
                     />
                 </div>
