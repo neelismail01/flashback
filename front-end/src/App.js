@@ -3,7 +3,6 @@ import Register from './components/Register/Register';
 import Signin from './components/Signin/Signin';
 import Navigation from './components/Navigation/Navigation';
 import Home from './components/Home/Home';
-import Sidebar from './components/Sidebar/Sidebar';
 import './App.css';
 
 const App = () => {
@@ -36,10 +35,9 @@ const App = () => {
       isSignedIn === true
       ? (
         <div className="home-container">
-          <Sidebar className="sidebar"/>
           <div className="nav-home">
-            <Navigation onRouteChange={handleRouteChange} />
-            <Home userId={user.id}  />
+            <Navigation onRouteChange={handleRouteChange} userId={user.id} />
+            <Home userId={user.id} />
           </div>
         </div>
         )
