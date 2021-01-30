@@ -1,35 +1,25 @@
-import React from 'react';
+import React , { useState } from 'react';
+import ImageModal from '../ImageModal/ImageModal';
 import './Feed.css';
 
 const Feed = (props) => {
 
-  console.log(props)
+  const [showModal, setShowModal] = useState(false);
 
   const imgUrl = `http://localhost:5000/uploads/${props.postData.img_path}`;
-  const who = `${props.postData.who}`;
-  const where = `${props.postData.location}`;
-  const when = `${props.postData.time_of_memory}`;
-  const what = `${props.postData.what}`;
 
-  console.log(imgUrl)
-  console.log(who)
-  console.log(where);
-  console.log(when)
-  console.log(what)
+  const openModal = () => {
+    setShowModal(true);
+  }
 
-  /*
-        <div className="details">
-          {who && <p className="fact">{who}</p>}
-          {where && <p className="fact">{where}</p>}
-          {when && <p className="fact">{when}</p>}
-          {what && <p className="fact">{what}</p>}
-        </div>
-  */
-
+  const closeModal = () => {
+      setShowModal(false);
+  }
 
   return (
       <div className="feed-container">
-        <img src={imgUrl} alt={props.imgPath} />
+        <img src={imgUrl} alt={props.imgPath} onClick={openModal} />
+        <ImageModal showModal={showModal} closeModal={closeModal} imgUrl={imgUrl} postData={props.postData} />
       </div>
   );
 }

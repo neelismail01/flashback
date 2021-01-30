@@ -54,11 +54,9 @@ const Modal = (props) => {
     const closeModal = event => {
         setFileSelected(false);
         props.closeModal()
-        console.log("in modal component");
     }
 
     if (props.showModal) {
-        console.log("modal should be shown")
         return (
             <div className="modal">
                 <div className="modal-card">
@@ -94,7 +92,6 @@ const Modal = (props) => {
             </div>
         );
     }
-    console.log('no modal should be shown')
     return null;
 };
 

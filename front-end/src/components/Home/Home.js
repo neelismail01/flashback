@@ -9,12 +9,10 @@ const Home = (props) => {
     const apiUrl = `http://localhost:5000/feed/id=${props.userId}`;
     const fetchData = async () => {
         const response = await axios.get(apiUrl);
-        console.log(response.data);
         setFeedData(response.data);
     }
 
     useEffect(() => {
-
         fetchData();
     }, [feedData.length])
 

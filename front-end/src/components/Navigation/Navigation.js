@@ -7,12 +7,10 @@ const Navigation = (props) => {
 
     const openModal = () => {
         setShowModal(true);
-        console.log("open modal");
     }
 
     const closeModal = () => {
         setShowModal(false);
-        console.log("close modal");
     }
 
     return (

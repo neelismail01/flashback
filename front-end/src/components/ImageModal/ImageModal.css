@@ -1,0 +1,30 @@
+.image-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.75); /* Black w/ opacity */
+}
+
+.image-modal-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.details {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 10px;
+}
+
+.fact {
+    background-color: #00baf7;
+    color: white;
+    border-radius: 15px;
+    margin: 5px;
+    padding: 10px 25px;
+    font-weight: bold;
+}
