@@ -1,11 +1,12 @@
-.image-modal {
+.modal {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.75); /* Black w/ opacity */
+    background-color: rgba(0,0,0,0.75); /* Black w/ opacity */
 }
 
-.image-modal-card {
+.modal-card {
+    background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,7 +22,7 @@
 }
 
 .fact {
-    background-color: #00baf7;
+    background-color: #006399;
     color: white;
     border-radius: 15px;
     margin: 5px;

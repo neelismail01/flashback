@@ -1,4 +1,4 @@
-import React , { useState } from 'react';
+import React, { useState } from 'react';
 import ImageModal from '../ImageModal/ImageModal';
 import './Feed.css';
 

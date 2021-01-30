@@ -13,8 +13,8 @@ const ImageModal = (props) => {
     
     if (props.showModal) {
         return (
-            <div className="image-modal">
-                <div className="image-modal-card">
+            <div className="modal">
+                <div className="modal-card">
                     <img className="image" src={props.imgUrl} />
                     <div className="details">
                         {who && <p className="fact">{who}</p>}
