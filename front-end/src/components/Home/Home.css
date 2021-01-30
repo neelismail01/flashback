@@ -1,4 +1,4 @@
-.feed-container {
+.feed-container-a {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,6 +8,6 @@
 .feed {
     width: 85%;
     display: flex;
-    justify-content: left;
+    justify-content: center;
     flex-wrap: wrap;
 }

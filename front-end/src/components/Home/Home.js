@@ -17,7 +17,7 @@ const Home = (props) => {
     }, [feedData.length])
 
     return (
-        <div className="feed-container">
+        <div className="feed-container-a">
             <div className="feed">
                 {
                     feedData.length === 0

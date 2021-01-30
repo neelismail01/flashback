@@ -14,20 +14,22 @@ const ImageModal = (props) => {
     if (props.showModal) {
         return (
             <div className="modal">
-                <div className="modal-card">
-                    <img className="image" src={props.imgUrl} />
-                    <div className="details">
-                        {who && <p className="fact">{who}</p>}
-                        {where && <p className="fact">{where}</p>}
-                        {when && <p className="fact">{when}</p>}
-                        {what && <p className="fact">{what}</p>}
+                <div className="image-modal-card">
+                    <img className="modal-image" style={{width: '50%', height: '100%', objectFit: 'contain'}} src={props.imgUrl} />
+                    <div className="details-container">
+                        <div className="details">
+                            {who && <p className="fact">{who}</p>}
+                            {where && <p className="fact">{where}</p>}
+                            {when && <p className="fact">{when}</p>}
+                            {what && <p className="fact">{what}</p>}
+                        </div>
+                        <input
+                            type="button"
+                            value="Close"
+                            className="upload-close"
+                            onClick={closeModal}
+                        />
                     </div>
-                    <input
-                        type="button"
-                        value="Close"
-                        className="upload-close"
-                        onClick={closeModal}
-                    />
                 </div>
             </div>
         );
