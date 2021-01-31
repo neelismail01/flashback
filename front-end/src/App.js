@@ -3,7 +3,6 @@ import Register from './components/Register/Register';
 import Signin from './components/Signin/Signin';
 import Navigation from './components/Navigation/Navigation';
 import Home from './components/Home/Home';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 
 const App = () => {

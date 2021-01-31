@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Modal from '../Modal/Modal';
-import { useAuth, AuthProvider } from '../../contexts/AuthContext';
 import './Navigation.css';
 
 const Navigation = (props) => {

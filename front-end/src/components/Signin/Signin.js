@@ -1,13 +1,9 @@
 import React, {useState} from 'react';
-import { useAuth, AuthProvider } from '../../contexts/AuthContext';
 import './Signin.css';
 
 const Signin = (props) => {
     const [_username, setUsername] = useState('');
     const [_password, setPassword] = useState('');
-    const [error, setError] = useState('');
-    cosnt [loading, setLoading] = useState(false);
-    const { register } = useAuth();
 
     const onUsernameChange = (event) => {
         setUsername(event.target.value);
@@ -21,15 +17,6 @@ const Signin = (props) => {
         event.preventDefault();
 
         try {
-            setError('');
-            setLoading(true);
-            await login(_email, _password);
-        } catch (err) {
-            setError('Failed to sign in');
-        }
-        setLoading(false);
-
-        /*try {
             const response = await fetch('http://localhost:5000/signin', {
                 method: 'post',
                 headers: {'Content-Type': 'application/json'},
@@ -54,53 +41,51 @@ const Signin = (props) => {
             console.log(err);
             setUsername('');
             setPassword('');
-        }*/
+        }
     }
 
     return (
-        <AuthProvider>
-            <div class="signin-form-container">
-                <div class="signin-form-card">
-                    <h1>Welcome Back</h1>
-                    <form>
-                        <div className="signin-form-body">
-                            <input
-                                type="text"
-                                placeholder="Username"
-                                value={_username}
-                                name="username"
-                                required
-                                className="signin-form-input"
-                                onChange={onUsernameChange}
-                            />
-                            <input
-                                type="password"
-                                placeholder="Password"
-                                value={_password}
-                                name="password"
-                                required
-                                className="signin-form-input"
-                                onChange={onPasswordChange}
-                            />
-                            <button
-                                variant="primary"
-                                type="submit"
-                                className="signin-form-button"
-                                onClick={handleSignin}
-                            >
-                                Sign In
-                            </button>
-                            <p
-                                className="register-link"
-                                onClick={() => props.onRouteChange('register')}
-                            >
-                                Don't have an account? Sign up
-                            </p>
-                        </div>
-                    </form>
-                </div>
+        <div class="signin-form-container">
+            <div class="signin-form-card">
+                <h1>Welcome Back</h1>
+                <form>
+                    <div className="signin-form-body">
+                        <input
+                            type="text"
+                            placeholder="Username"
+                            value={_username}
+                            name="username"
+                            required
+                            className="signin-form-input"
+                            onChange={onUsernameChange}
+                        />
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            value={_password}
+                            name="password"
+                            required
+                            className="signin-form-input"
+                            onChange={onPasswordChange}
+                        />
+                        <button
+                            variant="primary"
+                            type="submit"
+                            className="signin-form-button"
+                            onClick={handleSignin}
+                        >
+                            Sign In
+                        </button>
+                        <p
+                            className="register-link"
+                            onClick={() => props.onRouteChange('register')}
+                        >
+                            Don't have an account? Sign up
+                        </p>
+                    </div>
+                </form>
             </div>
-        </AuthProvider>
+        </div>
     );
 }
 
