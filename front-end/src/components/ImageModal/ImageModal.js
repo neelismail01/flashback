@@ -1,14 +1,27 @@
 import React from 'react';
+import axios from 'axios';
 import './ImageModal.css';
 
 const ImageModal = (props) => {
-    const who = `${props.postData.who}`;
-    const where = `${props.postData.location}`;
-    const when = `${props.postData.time_of_memory}`;
-    const what = `${props.postData.what}`;
+    const favourite = props.isFavourite;
+    const who = props.postData.who;
+    const where = props.postData.location;
+    const when = props.postData.time_of_memory;
+    const what = props.postData.what;
 
     const closeModal = (event) => {
         props.closeModal();
+    }
+
+    const handleLove = (event) => {
+        axios.post('http://localhost:5000/favourite', !favourite)
+        .then(res => {
+            favourite = res.data.favourite;
+        })
+    }
+
+    const handleEdit = (event) => {
+
     }
     
     if (props.showModal) {
@@ -22,6 +35,10 @@ const ImageModal = (props) => {
                             {where && <p className="fact">{where}</p>}
                             {when && <p className="fact">{when}</p>}
                             {what && <p className="fact">{what}</p>}
+                        </div>
+                        <div className="love-close-btns">
+                            <p className="love-edit" onClick={handleLove}>Love</p>
+                            <p className="love-edit" onClick={handleEdit}>Edit</p>
                         </div>
                         <input
                             type="button"
