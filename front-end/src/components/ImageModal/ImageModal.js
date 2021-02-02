@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
 import './ImageModal.css';
+import favouriteFile from './favourite.png';
+import notFavouriteFile from './not-favourite.png';
 
 const ImageModal = (props) => {
-    const favourite = props.isFavourite;
+    const [favourite, setFavourite] = useState(props.postData.favourite);
     const who = props.postData.who;
     const where = props.postData.location;
     const when = props.postData.time_of_memory;
@@ -14,9 +16,14 @@ const ImageModal = (props) => {
     }
 
     const handleLove = (event) => {
-        axios.post('http://localhost:5000/favourite', !favourite)
+        event.preventDefault();
+        axios.put(`http://localhost:5000/favourite/${props.imgUrl.substring(30)}`, {favourite: !favourite})
         .then(res => {
-            favourite = res.data.favourite;
+            setFavourite(!favourite)
+            console.log(favourite);
+        })
+        .catch(err => {
+            console.log(err);
         })
     }
 
@@ -37,15 +44,23 @@ const ImageModal = (props) => {
                             {what && <p className="fact">{what}</p>}
                         </div>
                         <div className="love-close-btns">
-                            <p className="love-edit" onClick={handleLove}>Love</p>
                             <p className="love-edit" onClick={handleEdit}>Edit</p>
                         </div>
-                        <input
-                            type="button"
-                            value="Close"
-                            className="upload-close"
-                            onClick={closeModal}
-                        />
+                        <div className="love-close-btns">
+                            {
+                                favourite
+                                ?
+                                <img className="favourite-img" src={favouriteFile} onClick={handleLove} />
+                                :
+                                <img className="favourite-img" src={notFavouriteFile} onClick={handleLove} />
+                            }
+                            <input
+                                type="button"
+                                value="Close"
+                                className="upload-close"
+                                onClick={closeModal}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

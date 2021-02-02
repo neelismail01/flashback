@@ -51,6 +51,13 @@
     font-size: 0.8rem;
 }
 
+.favourite-img {
+    max-width: 40px;
+    max-height: 40px;
+    background-color: white;
+    cursor: pointer;
+}
+
 .love-close-btns {
     display: flex;
     flex-direction: row;

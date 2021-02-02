@@ -107,7 +107,8 @@ app.post('/post', (req, res) => {
             who: req.body.who,
             location: req.body.where,
             time_of_memory: req.body.when,
-            what: req.body.what
+            what: req.body.what,
+            favourite: false
         })
         .into("posts")
         .returning("*")
@@ -120,11 +121,27 @@ app.post('/post', (req, res) => {
     })
 })
 
+app.put('/favourite/:imgurl', (req, res) => {
+    knex('posts')
+    .where({
+        'img_path': req.params.imgurl
+    })
+    .update({
+        favourite: req.body.favourite
+    }, ['favourite'])
+    .then(row => {
+        return res.json(row[0].favourite);
+    })
+    .catch(err => {
+        console.log(err);
+    })
+})
+
 app.get('/feed/:id', (req, res) => {
     knex('posts').where({
         'user_id': parseInt(req.params.id.substring(3))
     })
-    .select('img_path', 'who', 'location', 'time_of_memory', 'what')
+    .select('img_path', 'who', 'location', 'time_of_memory', 'what', 'favourite')
     .orderBy('post_id', 'desc')
     .then(paths => {
         for (let i = 0; i < paths.length; ++i) {
@@ -132,7 +149,6 @@ app.get('/feed/:id', (req, res) => {
                 paths.splice(i, 1);
             }
         }
-        console.log(paths);
         return res.json(paths);
     })
     .catch(err => {
