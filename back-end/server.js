@@ -122,6 +122,7 @@ app.post('/post', (req, res) => {
 })
 
 app.put('/favourite/:imgurl', (req, res) => {
+    console.log(req);
     knex('posts')
     .where({
         'img_path': req.params.imgurl
@@ -154,6 +155,27 @@ app.get('/feed/:id', (req, res) => {
     .catch(err => {
         console.log(err);
     });
+})
+
+app.put('/edit', (req, res) => {
+    console.log(req);
+
+    knex('posts')
+    .where({
+        'img_path': req.body.imgUrl.substring(30)
+    })
+    .update({
+        'who': req.body.who,
+        'location': req.body.where,
+        'time_of_memory': req.body.when,
+        'what': req.body.what
+    }, ['who', 'location', 'time_of_memory', 'what'])
+    .then(rows => {
+        return res.json(rows[0]);
+    })
+    .catch(err => {
+        console.log(err);
+    })
 })
 
 app.listen(5000, () => console.log(`Server listening on Port 5000`));

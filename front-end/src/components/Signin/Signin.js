@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import './Signin.css';
+import Typing from 'react-typing-animation';
 
 const Signin = (props) => {
     const [_username, setUsername] = useState('');
@@ -44,9 +45,26 @@ const Signin = (props) => {
         }
     }
 
+    const AnimatedTypingComponent = () => (
+        <Typing>
+        <div>
+          <h5>Upload and store your photos and albums.</h5>
+        </div>
+      </Typing>
+    );
+
+    const AnimatedTypingComponentTwo = () => (
+        <Typing>
+        <div>
+          <Typing.Delay ms={4000} />
+          <h5>Search memories using natural language.</h5>
+        </div>
+      </Typing>
+    );
+
     return (
-        <div class="signin-form-container">
-            <div class="signin-form-card">
+        <div class="signin">
+            <div class="signin-form-card-left">
                 <h1>Welcome Back</h1>
                 <form>
                     <div className="signin-form-body">
@@ -77,13 +95,32 @@ const Signin = (props) => {
                             Sign In
                         </button>
                         <p
-                            className="register-link"
+                            className="signin-link"
                             onClick={() => props.onRouteChange('register')}
                         >
-                            Don't have an account? Sign up
+                            <div className="click">Don't have an account? Sign up</div>
                         </p>
                     </div>
                 </form>
+            </div>
+            <div className="signin-form-card-right">
+                <h1><div id="flashback">Flashback</div></h1>
+                <br />
+                <AnimatedTypingComponent />
+                <AnimatedTypingComponentTwo />
+                <br />
+                <br />
+                <div className="google">
+                    Sign in with Google
+                </div>
+                <br />
+                <div className="facebook">
+                    Sign in with Facebook
+                </div>
+                <br />
+                <div className="apple">
+                    Sign in with Apple
+                </div>
             </div>
         </div>
     );

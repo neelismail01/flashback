@@ -1,20 +1,36 @@
-.signin-form-container {
-    width: 100%;
-    height: 100vh;
+.signin {
     display: flex;
     align-items: center;
+    background-image: url("photos.jpg");
+    width: 100%;
+    height: 100vh;
     justify-content: center;
 }
 
-.signin-form-card {
+.signin-form-card-left {
     background-color: white;
+    width: 40%;
+    height: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding: 5rem;
-    width: 250px;
-    border-radius: 15px;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+}
+
+.signin-form-card-right {
+    /*background-image: linear-gradient(#5c5cd6,#cccccc);*/
+    background-color: #7070db;
+    width: 40%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5rem;
+    color: white;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
 }
 
 .signin-form-card h1 {
@@ -32,11 +48,12 @@
 .signin-form-input {
     margin-top: 12.5px;
     margin-bottom: 12.5px;
-    width: 225px;
+    width: 275px;
     padding: 10px;
     outline: none;
     border: none;
-    border-bottom: 3px solid #009cc7;
+    border: solid #3333cc;
+    border-radius: 30px;
     background-color: #fffef7;
     font-size: 1rem;
 }
@@ -45,12 +62,43 @@
     margin-top: 20px;
     padding: 15px 40px;
     border-radius: 10px;
-    background-color: #00baf7;
+    /*background-image: linear-gradient(#4d4dff,#bf80ff);*/
+    background-color: #3333cc;
     color: white;
     border: none;
     font-size: 1rem;
 }
 
-.register-link {
+.signin-link {
     margin-top: 2rem;
+}
+
+.google {
+    color: black;
+    background-color: white;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.facebook {
+    color: white;
+    background-color: #4040bf;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.apple {
+    color: black;
+    background-color: white;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.click {
+    cursor: pointer;
+}
+
+#flashback {
+    font-family: "Billion Dreams", serif;
+    font-size: 75px;
 }

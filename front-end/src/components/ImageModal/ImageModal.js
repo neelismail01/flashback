@@ -1,11 +1,14 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import './ImageModal.css';
+import EditModal from '../EditModal/EditModal';
+import TagModal from '../TagModal/TagModal';
 import favouriteFile from './favourite.png';
 import notFavouriteFile from './not-favourite.png';
 
 const ImageModal = (props) => {
     const [favourite, setFavourite] = useState(props.postData.favourite);
+    const [editVisible, setEditVisible] = useState(false);
     const who = props.postData.who;
     const where = props.postData.location;
     const when = props.postData.time_of_memory;
@@ -20,7 +23,6 @@ const ImageModal = (props) => {
         axios.put(`http://localhost:5000/favourite/${props.imgUrl.substring(30)}`, {favourite: !favourite})
         .then(res => {
             setFavourite(!favourite)
-            console.log(favourite);
         })
         .catch(err => {
             console.log(err);
@@ -28,31 +30,33 @@ const ImageModal = (props) => {
     }
 
     const handleEdit = (event) => {
+        setEditVisible(true);
+    }
 
+    const closeEdit = (event) => {
+        setEditVisible(false);
     }
     
     if (props.showModal) {
         return (
             <div className="modal">
                 <div className="image-modal-card">
-                    <img className="modal-image" style={{width: '50%', height: '100%', objectFit: 'contain'}} src={props.imgUrl} />
+                    <img className="modal-image" style={{width: '50%', height: '100%', objectFit: 'contain'}} alt="post" src={props.imgUrl} />
                     <div className="details-container">
-                        <div className="details">
-                            {who && <p className="fact">{who}</p>}
-                            {where && <p className="fact">{where}</p>}
-                            {when && <p className="fact">{when}</p>}
-                            {what && <p className="fact">{what}</p>}
-                        </div>
-                        <div className="love-close-btns">
-                            <p className="love-edit" onClick={handleEdit}>Edit</p>
-                        </div>
+                        {
+                        editVisible
+                        ?
+                        <EditModal refreshDetails={props.refreshDetails} who={who} where={where} when={when} what={what} closeEdit={closeEdit} imgUrl={props.imgUrl} />
+                        :
+                        <TagModal who={who} where={where} when={when} what={what} handleEdit={handleEdit} />
+                        }
                         <div className="love-close-btns">
                             {
                                 favourite
                                 ?
-                                <img className="favourite-img" src={favouriteFile} onClick={handleLove} />
+                                <img className="favourite-img" src={favouriteFile} alt="click to make favourite" onClick={handleLove} />
                                 :
-                                <img className="favourite-img" src={notFavouriteFile} onClick={handleLove} />
+                                <img className="favourite-img" src={notFavouriteFile} alt="click to unfavourite" onClick={handleLove} />
                             }
                             <input
                                 type="button"
@@ -66,6 +70,7 @@ const ImageModal = (props) => {
             </div>
         );
     }
+
     return null;
 }
 
