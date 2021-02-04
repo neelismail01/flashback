@@ -25,7 +25,7 @@ const Home = (props) => {
                     <p>Upload your first memory!</p>
                     :
                     feedData.map((feedData, index) => {
-                        return <Feed refreshDetails={setFeedData} postData={feedData} key={index} />
+                        return <Feed postData={feedData} key={index} />
                     })
                 }
             </div>
