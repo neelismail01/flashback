@@ -41,7 +41,9 @@ const ImageModal = (props) => {
                                 <TagModal imgUrl={props.imgUrl} handleEdit={handleEdit} />
                             }
                         </div>
-                        <p className="delete-btn" onClick={props.handleEdit}>Delete</p>
+                        <div className="delete">
+                            <p className="delete-btn" onClick={props.handleEdit}>Delete</p>
+                        </div>
                     </div>
                 </div>
             </div>

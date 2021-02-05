@@ -48,7 +48,6 @@ const TagModal = (props) => {
                         {what && <p className="fact">{what}</p>}
                     </div>
                     <div className="tagmodal-btns">
-                        <p className="edit-btn" onClick={props.handleEdit}>Edit</p>
                         {
                             favourite
                             ?
@@ -56,6 +55,8 @@ const TagModal = (props) => {
                             :
                             <p className="not-favourite-btn" onClick={handleLove}>Favourite</p>
                         }
+                        <p className="edit-btn" onClick={props.handleEdit}>Edit</p>
+                        <p className="edit-btn" onClick={props.handleEdit}>Share</p>
                     </div>
                 </div>
                 :

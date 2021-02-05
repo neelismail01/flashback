@@ -22,18 +22,24 @@
 .close-container {
     display: flex;
     justify-content: flex-end;
+    border: 5px solid red;
 }
 
 .upload-close {
-    padding: 10px;
+    padding: 1px;
     border: none;
     font-size: 1.25rem;
     transition: transform .2s ease-out;
 }
 
 .upload-close:hover {
-    padding: 10px;
+    padding: 1px;
     transform: scale(0.925);
+}
+
+.tags-edit {
+    display: flex;
+    justify-content: center;
 }
 
 .details-container {
@@ -43,7 +49,11 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border: 1px solid black;
+    border: 5px solid black;
+}
+
+.delete {
+    border: 5px solid purple;
 }
 
 .delete-btn {
