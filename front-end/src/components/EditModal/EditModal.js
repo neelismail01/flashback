@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import './EditModal.css';
 
 const EditModal = (props) => {
+    const [loaded, setLoaded] = useState(false);
     const [who, setWho] = useState(props.who);
     const [where, setWhere] = useState(props.where);
     const [when, setWhen] = useState(props.when);
@@ -48,18 +49,39 @@ const EditModal = (props) => {
         props.closeEdit();
     }
 
+    useEffect(() => {
+        axios.get(`http://localhost:5000/details/${props.imgUrl.substring(30)}`)
+        .then(response => {
+            setWho(response.data.who);
+            setWhere(response.data.location);
+            setWhen(response.data.time_of_memory);
+            setWhat(response.data.what);
+            setLoaded(true);
+            console.log(`${who}, ${what}, ${where}, ${when}`);
+        })
+        .catch(err => console.log(err));
+    })
+
     return (
         <div className="editmodal-container">
-            <form>
-                <input className="details-input" type="text" value={who} name="who" onChange={handleDetails} />
-                <input className="details-input" type="text" value={where} name="where" onChange={handleDetails} />
-                <input className="details-input" type="date" value={when} name="when" onChange={handleDetails} />
-                <input className="details-input" type="text" value={what} name="what" onChange={handleDetails} />
-                <div className="edit-row">
-                    <button className="update-btn" onClick={handleCancel}>Cancel</button>
-                    <button className="update-btn" onClick={handleFormSubmit}>Confirm</button>
+            {
+                loaded
+                ?
+                <form>
+                    <input className="details-input" type="text" value={who} name="who" onChange={handleDetails} />
+                    <input className="details-input" type="text" value={where} name="where" onChange={handleDetails} />
+                    <input className="details-input" type="date" value={when} name="when" onChange={handleDetails} />
+                    <input className="details-input" type="text" value={what} name="what" onChange={handleDetails} />
+                    <div className="buttons-row">
+                        <button className="update-btn" onClick={handleCancel}>Cancel</button>
+                        <button className="update-btn" onClick={handleFormSubmit}>Confirm</button>
+                    </div>
+                </form>
+                :
+                <div className="loading">
+                    <p className="loading-message">Retrieving image tags...</p>
                 </div>
-            </form>
+            }
         </div>
     );
 }

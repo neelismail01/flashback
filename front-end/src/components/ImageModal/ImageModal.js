@@ -32,13 +32,15 @@ const ImageModal = (props) => {
                                 onClick={closeModal}
                             />
                         </div>
-                        {
-                        editVisible
-                        ?
-                        <EditModal closeEdit={closeEdit} imgUrl={props.imgUrl} />
-                        :
-                        <TagModal imgUrl={props.imgUrl} handleEdit={handleEdit} />
-                        }
+                        <div className="tags-edit">
+                            {
+                                editVisible
+                                ?
+                                <EditModal closeEdit={closeEdit} imgUrl={props.imgUrl} />
+                                :
+                                <TagModal imgUrl={props.imgUrl} handleEdit={handleEdit} />
+                            }
+                        </div>
                         <p className="delete-btn" onClick={props.handleEdit}>Delete</p>
                     </div>
                 </div>
