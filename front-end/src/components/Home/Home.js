@@ -4,28 +4,26 @@ import Feed from '../Feed/Feed';
 import './Home.css';
 
 const Home = (props) => {
-    const [feedData, setFeedData] = useState([]);
-
-    const apiUrl = `http://localhost:5000/feed/id=${props.userId}`;
-    const fetchData = async () => {
-        const response = await axios.get(apiUrl);
-        setFeedData(response.data);
-    }
+    const [imgUrls, setImgUrls] = useState([]);
 
     useEffect(() => {
-        fetchData();
-    }, [feedData.length])
+        axios.get(`http://localhost:5000/feed/id=${props.userId}`)
+        .then(response => {
+            setImgUrls(response.data);
+        })
+        .catch(err => console.log(err));
+    }, [imgUrls.length])
 
     return (
         <div className="feed-container-a">
             <div className="feed">
                 {
-                    feedData.length === 0
+                    imgUrls.length === 0
                     ?
                     <p>Upload your first memory!</p>
                     :
-                    feedData.map((feedData, index) => {
-                        return <Feed postData={feedData} key={index} />
+                    imgUrls.map((imgUrl, index) => {
+                        return <Feed imgUrl={imgUrl.img_path} key={index} />
                     })
                 }
             </div>

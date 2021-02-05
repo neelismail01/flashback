@@ -142,7 +142,7 @@ app.get('/feed/:id', (req, res) => {
     knex('posts').where({
         'user_id': parseInt(req.params.id.substring(3))
     })
-    .select('img_path', 'who', 'location', 'time_of_memory', 'what', 'favourite')
+    .select('img_path')
     .orderBy('post_id', 'desc')
     .then(paths => {
         for (let i = 0; i < paths.length; ++i) {
@@ -157,9 +157,22 @@ app.get('/feed/:id', (req, res) => {
     });
 })
 
-app.put('/edit', (req, res) => {
-    console.log(req);
+app.get('/details/:imgUrl', (req, res) => {
+    knex('posts').where({
+        'img_path': req.params.imgUrl
+    })
+    .select('who', 'location', 'time_of_memory', 'what', 'favourite')
+    .then(paths => {
+        console.log('first')
+        console.log(paths[0]);
+        return res.json(paths[0]);
+    })
+    .catch(err => {
+        console.log(err);
+    });
+})
 
+app.put('/edit', (req, res) => {
     knex('posts')
     .where({
         'img_path': req.body.imgUrl.substring(30)

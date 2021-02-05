@@ -43,18 +43,24 @@ const EditModal = (props) => {
         })
     }
 
+    const handleCancel = event => {
+        event.preventDefault();
+        props.closeEdit();
+    }
+
     return (
-        <form >
-            <div className="detail-inputs">
-                <input className="file-details" type="text" value={who} name="who" onChange={handleDetails} />
-                <input className="file-details" type="text" value={where} name="where" onChange={handleDetails} />
-            </div>
-            <div className="detail-inputs">
-                <input className="file-details" type="date" value={when} name="when" onChange={handleDetails} />
-                <input className="file-details" type="text" value={what} name="what" onChange={handleDetails} />
-            </div>
-            <button className="submit" onClick={handleFormSubmit}>Confirm</button>
-        </form>
+        <div className="editmodal-container">
+            <form>
+                <input className="details-input" type="text" value={who} name="who" onChange={handleDetails} />
+                <input className="details-input" type="text" value={where} name="where" onChange={handleDetails} />
+                <input className="details-input" type="date" value={when} name="when" onChange={handleDetails} />
+                <input className="details-input" type="text" value={what} name="what" onChange={handleDetails} />
+                <div className="edit-row">
+                    <button className="update-btn" onClick={handleCancel}>Cancel</button>
+                    <button className="update-btn" onClick={handleFormSubmit}>Confirm</button>
+                </div>
+            </form>
+        </div>
     );
 }
 
