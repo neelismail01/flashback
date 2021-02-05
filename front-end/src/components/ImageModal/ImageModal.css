@@ -7,8 +7,8 @@
 
 .image-modal-card {
     position: fixed;
-    width: 80%;
-    height: 70%;
+    width: 90%;
+    height: 80%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,9 +20,9 @@
 }
 
 .close-container {
+    height: 10%;
     display: flex;
     justify-content: flex-end;
-    border: 5px solid red;
 }
 
 .upload-close {
@@ -40,6 +40,7 @@
 .tags-edit {
     display: flex;
     justify-content: center;
+    height: 70%;
 }
 
 .details-container {
@@ -53,11 +54,14 @@
 }
 
 .delete {
-    border: 5px solid purple;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
 .delete-btn {
-    margin: 0.8rem;
     border: 1px solid red;
     padding: 3px 10px;
     color: red;
@@ -67,17 +71,12 @@
     cursor: pointer;
     display: flex;
     justify-content: center;
+    width: 80%;
 }
 
 .delete-btn:hover {
-    margin: 0.8rem;
-    border: 1px solid red;
-    padding: 3px 10px;
     color: white;
     background-color: red;
-    border-radius: 5px;
-    cursor: pointer;
-    display: flex;
     justify-content: center;
     transform: scale(0.98);
 }

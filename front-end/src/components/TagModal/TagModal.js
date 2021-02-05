@@ -42,21 +42,35 @@ const TagModal = (props) => {
                 ?
                 <div>
                     <div className="details">
-                        {who && <p className="fact">{who}</p>}
-                        {where && <p className="fact">{where}</p>}
-                        {when && <p className="fact">{when}</p>}
-                        {what && <p className="fact">{what}</p>}
+                        <div className="w-container">
+                            <div className="intro">Tagged</div>
+                            <div className="value">{who}</div>
+                        </div>
+                        <div className="w-container">
+                            <span className="intro">Where</span>
+                            <span className="value">{where}</span>
+                        </div>
+                        <div className="w-container">
+                            <span className="intro">When</span>
+                            <span className="value">{when}</span>
+                        </div>
+                        <div className="w-container">
+                            <span className="intro">What</span>
+                            <span className="value">{what}</span>
+                        </div>
                     </div>
                     <div className="tagmodal-btns">
-                        {
-                            favourite
-                            ?
-                            <p className="favourite-btn" onClick={handleLove}>Favourited!</p>
-                            :
-                            <p className="not-favourite-btn" onClick={handleLove}>Favourite</p>
-                        }
-                        <p className="edit-btn" onClick={props.handleEdit}>Edit</p>
-                        <p className="edit-btn" onClick={props.handleEdit}>Share</p>
+                        <div>
+                            {
+                                favourite
+                                ?
+                                <button className="favourite-btn" onClick={handleLove}>Favourited!</button>
+                                :
+                                <button className="not-favourite-btn" onClick={handleLove}>Favourite</button>
+                            }
+                            <button className="edit-btn" onClick={props.handleEdit}>Edit</button>
+                            <button className="edit-btn" onClick={props.handleEdit}>Share</button>
+                        </div>
                     </div>
                 </div>
                 :

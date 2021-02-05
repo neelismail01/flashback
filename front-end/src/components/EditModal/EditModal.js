@@ -60,23 +60,60 @@ const EditModal = (props) => {
             console.log(`${who}, ${what}, ${where}, ${when}`);
         })
         .catch(err => console.log(err));
-    })
+    }, [])
+
+    /*
+            <div className="input-fields-container">
+                <input className="details-input" type="text" value={who} name="who" onChange={handleDetails} />
+                <input className="details-input" type="text" value={where} name="where" onChange={handleDetails} />
+                <input className="details-input" type="date" value={when} name="when" onChange={handleDetails} />
+                <input className="details-input" type="text" value={what} name="what" onChange={handleDetails} />
+            </div>
+                </div>
+                <div className="editmodal-btns">
+                    <div className="buttons-row">
+                        <button className="update-btn" onClick={handleCancel}>Cancel</button>
+                        <button className="update-btn" onClick={handleFormSubmit}>Confirm</button>
+                    </div>
+                </div>
+            </div>
+            :
+            <div className="loading">
+                <p className="loading-message">Retrieving image tags...</p>
+            </div>
+        */
 
     return (
         <div className="editmodal-container">
             {
                 loaded
                 ?
-                <form>
-                    <input className="details-input" type="text" value={who} name="who" onChange={handleDetails} />
-                    <input className="details-input" type="text" value={where} name="where" onChange={handleDetails} />
-                    <input className="details-input" type="date" value={when} name="when" onChange={handleDetails} />
-                    <input className="details-input" type="text" value={what} name="what" onChange={handleDetails} />
-                    <div className="buttons-row">
-                        <button className="update-btn" onClick={handleCancel}>Cancel</button>
-                        <button className="update-btn" onClick={handleFormSubmit}>Confirm</button>
+                <div>
+                    <div className="details">
+                        <div className="w-container">
+                                <span className="intro">Tagged</span>
+                                <input type="text" value={who} className="value" name="who" onChange={handleDetails} />
+                        </div>
+                        <div className="w-container">
+                                <span className="intro">Where</span>
+                                <input type="text" value={where} className="value" name="where" onChange={handleDetails} />
+                        </div>
+                        <div className="w-container">
+                                <span className="intro">When</span>
+                                <input type="text" value={when} className="value" name="when" onChange={handleDetails} />
+                        </div>
+                        <div className="w-container">
+                                <span className="intro">What</span>
+                                <input type="text" value={what} className="value" name="what" onChange={handleDetails} />
+                        </div>
                     </div>
-                </form>
+                    <div className="tagmodal-btns">
+                        <div>
+                            <button className="edit-btn" onClick={handleCancel}>Cancel</button>
+                            <button className="edit-btn" onClick={handleFormSubmit}>Confirm</button>
+                        </div>
+                    </div>
+                </div>
                 :
                 <div className="loading">
                     <p className="loading-message">Retrieving image tags...</p>
