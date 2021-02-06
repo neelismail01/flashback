@@ -5,10 +5,10 @@ import './Modal.css';
 const Modal = (props) => {
     const [file, setFile] = useState('Choose File')
     const [fileSelected, setFileSelected] = useState(false);
-    const [who, setWho] = useState();
-    const [where, setWhere] = useState();
-    const [when, setWhen] = useState();
-    const [what, setWhat] = useState();
+    const [who, setWho] = useState('');
+    const [where, setWhere] = useState('');
+    const [when, setWhen] = useState('');
+    const [what, setWhat] = useState('');
     const userId = props.userId;
 
     const handleFileInput = event => {
@@ -34,8 +34,16 @@ const Modal = (props) => {
 
     const handleFormSubmit = event => {
         event.preventDefault();
+        const data = new FormData();
+        data.append('userId', userId);
+        data.append('file', file);
+        data.append('who', who);
+        data.append('where', where);
+        data.append('when', when);
+        data.append('what', what);
+
         if (fileSelected) {
-            axios.post('http://localhost:5000/post', { userId, file, who, where, when, what })
+            axios.post('http://localhost:5000/post', data)
             .then(res => {
                 setFileSelected(false);
                 console.log(res.statusText);

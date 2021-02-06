@@ -69,7 +69,6 @@ const TagModal = (props) => {
                                 <button className="not-favourite-btn" onClick={handleLove}>Favourite</button>
                             }
                             <button className="edit-btn" onClick={props.handleEdit}>Edit</button>
-                            <button className="edit-btn" onClick={props.handleEdit}>Share</button>
                         </div>
                     </div>
                 </div>

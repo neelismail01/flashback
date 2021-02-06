@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './ImageModal.css';
 import EditModal from '../EditModal/EditModal';
 import TagModal from '../TagModal/TagModal';
+import axios from 'axios';
 
 const ImageModal = (props) => {
     const [editVisible, setEditVisible] = useState(false);
@@ -16,6 +17,17 @@ const ImageModal = (props) => {
 
     const closeEdit = (event) => {
         setEditVisible(false);
+    }
+
+    const handleDelete = event => {
+        event.preventDefault();
+        console.log('here');
+        axios.delete(`http://localhost:5000/delete/${props.imgUrl.substring(30)}`)
+        .then(response => {
+            console.log(response);
+            props.closeModal();
+        })
+        .catch(err => console.log(err));
     }
     
     if (props.showModal) {
@@ -40,7 +52,7 @@ const ImageModal = (props) => {
                                 <TagModal imgUrl={props.imgUrl} handleEdit={handleEdit} />
                             }
                         <div className="delete">
-                            <p className="delete-btn" onClick={props.handleEdit}>Delete</p>
+                            <button className="delete-btn" onClick={handleDelete}>Delete</button>
                         </div>
                     </div>
                 </div>

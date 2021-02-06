@@ -94,7 +94,6 @@ const upload = multer({ storage: storage }).single('file');
 
 app.post('/post', (req, res) => {
     upload(req, res, err => {
-        console.log(req.body);
         if (err instanceof multer.MulterError) {
             return res.status(500).json(err);
         } else if (err) {
@@ -122,7 +121,6 @@ app.post('/post', (req, res) => {
 })
 
 app.put('/favourite/:imgurl', (req, res) => {
-    console.log(req);
     knex('posts')
     .where({
         'img_path': req.params.imgurl
@@ -163,7 +161,6 @@ app.get('/details/:imgUrl', (req, res) => {
     })
     .select('who', 'location', 'time_of_memory', 'what', 'favourite')
     .then(paths => {
-        console.log('first')
         console.log(paths[0]);
         return res.json(paths[0]);
     })
@@ -189,6 +186,18 @@ app.put('/edit', (req, res) => {
     .catch(err => {
         console.log(err);
     })
+})
+
+app.delete('/delete/:imgUrl', (req, res) => {
+    knex('posts')
+    .where({
+        'img_path': req.params.imgUrl
+    })
+    .del()
+    .then(rows => {
+        res.send("Image deleted")
+    })
+    .catch(err => console.log(err));
 })
 
 app.listen(5000, () => console.log(`Server listening on Port 5000`));
