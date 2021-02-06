@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import Modal from '../Modal/Modal';
 import './Navigation.css';
+import './search-icon.jpeg';
 
 const Navigation = (props) => {
     const [showModal, setShowModal] = useState(false);
+    const [query, setQuery] = useState('');
 
     const openModal = () => {
         setShowModal(true);
@@ -11,6 +13,10 @@ const Navigation = (props) => {
 
     const closeModal = () => {
         setShowModal(false);
+    }
+
+    const handleChange = event => {
+        setQuery(event.target.value);
     }
 
     return (
@@ -21,6 +27,7 @@ const Navigation = (props) => {
                         type="text"
                         className="search-bar"
                         placeholder="Search"
+                        onChange={handleChange}
                     />
                     <input
                         type="button"
