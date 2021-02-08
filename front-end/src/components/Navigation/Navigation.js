@@ -39,6 +39,7 @@ const Navigation = (props) => {
         <div className="nav-bar-container">
             <div className="nav-bar">
                 <div className="search-upload">
+                    <h2 className="flashback" onClick={() => props.onRouteChange('home')}>Flashback</h2>
                     <input
                         type="text"
                         className="search-bar"
@@ -51,6 +52,12 @@ const Navigation = (props) => {
                         value="Upload Memory"
                         className="upload"
                         onClick={openModal}
+                    />
+                    <input
+                        type="button"
+                        value="Favourites"
+                        className="upload"
+                        onClick={() => props.onRouteChange('favourites')}
                     />
                     <Modal showModal={showModal} closeModal={closeModal} userId={props.userId} />
                 </div>
