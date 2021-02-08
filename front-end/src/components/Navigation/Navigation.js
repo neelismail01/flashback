@@ -26,10 +26,11 @@ const Navigation = (props) => {
 
     const handleSearch = event => {
         if (event.key === 'Enter') {
-            console.log(query);
             axios.get(`http://localhost:5000/search/${props.userId}?search=${query}`, { params: {query: query} })
             .then(response => {
                 console.log(response.data);
+                props.onSearch(response.data)
+                props.onRouteChange('search')
             })
             .catch(err => console.log(err))
         }
