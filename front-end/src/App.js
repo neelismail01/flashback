@@ -5,9 +5,9 @@ import Home from './components/Home/Home';
 import './App.css';
 
 const App = () => {
-  const [user, setUser] = useState({id: 2});
-  const [url, setUrl] = useState('home');
-  const [isSignedIn, setIsSignedIn] = useState(true);
+  const [user, setUser] = useState({id: ''});
+  const [url, setUrl] = useState('signin');
+  const [isSignedIn, setIsSignedIn] = useState(false);
 
   const handleRouteChange = (route) => {
     if (route === 'signout') {
@@ -24,6 +24,7 @@ const App = () => {
   }
 
   const handleSuccessfulSignin = (userId) => {
+    console.log(`Message: ${userId}`)
     setUser({id: userId})
     setIsSignedIn(true);
   }
