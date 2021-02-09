@@ -51,7 +51,6 @@
     display: flex;
     flex-wrap: wrap;
     word-wrap: initial;
-    highlight: none;
 }
 
 .tagmodal-btns {

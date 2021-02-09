@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Modal from '../Modal/Modal';
-import emptyheart from './emptyheart.png';
 import Upload from './upload.png';
 import './Navigation.css';
 
@@ -31,15 +30,18 @@ const Navigation = (props) => {
 
     return (
         <div className="nav-bar-container">
-            <div className="flashback-title" onClick={props.onHome}></div>
-            <input
-                type="text"
-                className="search-bar"
-                placeholder="Search"
-                onChange={handleChange}
-                onKeyPress={handleSearch}
-            />
-            <img src={Upload} id="upload" height="40%" onClick={openModal} />
+            <div className="search-upload">
+                <input
+                    type="text"
+                    className="search-bar"
+                    placeholder="Search"
+                    onChange={handleChange}
+                    onKeyPress={handleSearch}
+                />
+                <div className="upload-container" onClick={openModal}>
+                    <img src={Upload} className="upload" />
+                </div>
+            </div>
             <Modal onFeedChange={props.onFeedChange} showModal={showModal} closeModal={closeModal} userId={props.userId} />
         </div>       
     );
