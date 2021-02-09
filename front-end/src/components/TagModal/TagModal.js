@@ -27,17 +27,35 @@ const TagModal = (props) => {
         })
     }
 
+    const handleClick = detail => {
+        if (detail === 'who') {
+            props.onSearch(who);
+        } else if (detail === 'where') {
+            props.onSearch(where);
+        } else if (detail === 'when') {
+            props.onSearch(when);
+        } else if (detail === 'what') {
+            props.onSearch(what);
+        }
+        props.closeModal();
+    }
+
     useEffect(() => {
+        let mounted = true;
         axios.get(`http://localhost:5000/details/${props.imgUrl.substring(30)}`)
         .then(response => {
-            setWho(response.data.who);
-            setWhere(response.data.location);
-            setWhen(response.data.time_of_memory);
-            setWhat(response.data.what);
-            setFavourite(response.data.favourite);
-            setLoaded(true);
+            if (mounted) {
+                setWho(response.data.who);
+                setWhere(response.data.location);
+                setWhen(response.data.time_of_memory);
+                setWhat(response.data.what);
+                setFavourite(response.data.favourite);
+                setLoaded(true);
+            }
         })
         .catch(err => console.log(err));
+
+        return () => mounted = false;
     })
 
     return (
@@ -48,20 +66,20 @@ const TagModal = (props) => {
                 <div>
                     <div className="details">
                         <div className="w-container">
-                            <span className="intro">Tagged</span>
-                            <span className="value">{who}</span>
+                            <div className="intro">Tagged</div>
+                            <div onClick={() => handleClick('who')} value="who" className="value">{who}</div>
                         </div>
                         <div className="w-container">
-                            <span className="intro">Where</span>
-                            <span className="value">{where}</span>
+                            <div className="intro">Where</div>
+                            <div onClick={() => handleClick('where')} value="where" className="value">{where}</div>
                         </div>
                         <div className="w-container">
-                            <span className="intro">When</span>
-                            <span className="value">{when}</span>
+                            <div className="intro">When</div>
+                            <div onClick={() => handleClick('when')} value="when" className="value">{when}</div>
                         </div>
                         <div className="w-container">
-                            <span className="intro">What</span>
-                            <span className="value">{what}</span>
+                            <div className="intro">What</div>
+                            <div onClick={() => handleClick('what')} value="what" className="value">{what}</div>
                         </div>
                     </div>
                     <div className="tagmodal-btns">
