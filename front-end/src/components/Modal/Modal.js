@@ -5,10 +5,10 @@ import './Modal.css';
 const Modal = (props) => {
     const [file, setFile] = useState('Choose File')
     const [fileSelected, setFileSelected] = useState(false);
-    const [who, setWho] = useState('');
-    const [where, setWhere] = useState('');
-    const [when, setWhen] = useState('');
-    const [what, setWhat] = useState('');
+    const [who, setWho] = useState();
+    const [where, setWhere] = useState();
+    const [when, setWhen] = useState();
+    const [what, setWhat] = useState();
     const userId = props.userId;
 
     const handleFileInput = event => {
@@ -32,6 +32,16 @@ const Modal = (props) => {
         }
     }
 
+    const resetFields = () => {
+
+        setFile('');
+        setFileSelected(false);
+        setWho('');
+        setWhere('');
+        setWhen('');
+        setWhat('');
+    }
+
     const handleFormSubmit = event => {
         event.preventDefault();
         const data = new FormData();
@@ -41,16 +51,20 @@ const Modal = (props) => {
         data.append('where', where);
         data.append('when', when);
         data.append('what', what);
-
         if (fileSelected) {
             axios.post('http://localhost:5000/post', data)
             .then(res => {
                 setFileSelected(false);
+                props.closeModal();
+                resetFields();
                 console.log(res.statusText);
             })
             .catch(err => {
                 console.log(err);
             })
+        }
+        else {
+            console.log("No file uploaded");
         }
     }
 
@@ -64,7 +78,7 @@ const Modal = (props) => {
             <div className="modal">
                 <div className="modal-card">
                     <form>
-                        <input type="file" id="file" className="file" onChange={handleFileInput} />
+                        <input type="file" id="file" className="file" name="file" onChange={handleFileInput} />
                         <label className="upload-label" htmlFor="file" value="Upload an Image">Upload an Image</label>
                         <div>
                             {

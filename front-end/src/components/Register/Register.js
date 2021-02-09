@@ -1,12 +1,16 @@
 import React, {useState} from 'react';
 import './Register.css';
-import Typing from 'react-typing-animation';
 
 const Register = (props) => {
+    const [_name, setName] = useState('');
     const [_username, setUsername] = useState('');
     const [_email, setEmail] = useState('');
     const [_password, setPassword] = useState('');
     const [_confirmpassword, setConfirmPassword] = useState('');
+
+    const onNameChange = (event) => {
+        setName(event.target.value);
+    }
 
     const onUsernameChange = (event) => {
         setUsername(event.target.value);
@@ -32,6 +36,7 @@ const Register = (props) => {
                 method: 'post',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
+                    name: _name,
                     username: _username,
                     email: _email,
                     password: _password,
@@ -44,6 +49,7 @@ const Register = (props) => {
                 props.onRouteChange('signin');
             } else {
                 console.log('Email entered already exists');   
+                setName('');
                 setUsername('');
                 setEmail('');
                 setPassword('');
@@ -52,29 +58,13 @@ const Register = (props) => {
         } catch (err) {
             console.log(err);
             console.log('An error occurred registering');
+            setName('');
             setUsername('');
             setEmail('');
             setPassword('');
             setConfirmPassword('');
         }
     }
-
-    const AnimatedTypingComponent = () => (
-        <Typing>
-        <div>
-          <h5>Upload and store your photos and albums.</h5>
-        </div>
-      </Typing>
-    );
-
-      const AnimatedTypingComponentTwo = () => (
-        <Typing>
-        <div>
-          <Typing.Delay ms={4000} />
-          <h5>Search memories using natural language.</h5>
-        </div>
-      </Typing>
-    );
 
     return (
         <div className="register">
@@ -84,7 +74,16 @@ const Register = (props) => {
                         <div className="register-form-body">
                             <input
                                 type="text"
-                                placeholder="Enter a username" 
+                                placeholder="Enter full name" 
+                                value={_name}
+                                name="name"
+                                required
+                                className="register-form-input"
+                                onChange={onNameChange}
+                            />
+                            <input
+                                type="text"
+                                placeholder="Enter username" 
                                 value={_username}
                                 name="username"
                                 required
@@ -93,7 +92,7 @@ const Register = (props) => {
                             />
                             <input
                                 type="email"
-                                placeholder="Enter an email"
+                                placeholder="Enter email"
                                 value={_email}
                                 name="email"
                                 required
@@ -102,7 +101,7 @@ const Register = (props) => {
                             />
                             <input
                                 type="password"
-                                placeholder="Enter a Password"
+                                placeholder="Enter password"
                                 value={_password}
                                 name="password"
                                 required
@@ -111,7 +110,7 @@ const Register = (props) => {
                             />
                             <input
                                 type="password"
-                                placeholder="Confirm Your Password"
+                                placeholder="Confirm password"
                                 value={_confirmpassword}
                                 name="cpassword"
                                 required
@@ -126,33 +125,24 @@ const Register = (props) => {
                             >
                                 Create Account
                             </button>
-                            <p
-                                className="register-link"
-                                onClick={() => props.onRouteChange('signin')}
-                            >
-                                <div className="click">Already have an account? Sign In</div>
-                            </p>
                         </div>
                     </form>
                 </div>
                 <div className="register-form-card-right">
-                    <h1><div id="flashback">Flashback</div></h1>
+                    <h1><div className="flashback">Flashback</div></h1>
                     <br />
-                    <AnimatedTypingComponent />
-                    <AnimatedTypingComponentTwo />
+                    <h5>Upload and store your photos.</h5>
+                    <h5>Search memories using natural language.</h5>
                     <br />
-                    <br />
-                    <div className="google">
-                        Sign up with Google
-                    </div>
-                    <br />
-                    <div className="facebook">
-                        Sign up with Facebook
-                    </div>
-                    <br />
-                    <div className="apple">
-                        Sign up with Apple
-                    </div>
+                    <h5 className="register-link">Already have an account?</h5>
+                    <button
+                    variant="primary"
+                    type="submit"
+                    className="register-form-signin"
+                    onClick={() => props.onRouteChange('signin')}
+                    >
+                    Sign In
+                    </button>
                 </div>
         </div>
     );

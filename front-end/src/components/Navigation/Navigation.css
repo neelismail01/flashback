@@ -1,23 +1,64 @@
+img {
+    transition: transform .3s;
+}
+
+.nav-bar img:hover {
+    transform: scale(0.8);
+}
+
 .nav-bar-container {
-    background-color: #f7f7f7;
-    height: 75px;
+    background-color: #7070db;
+    height: 85px;
     display: flex;
-    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
 .nav-bar {
-    width: 85%;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
-.search-upload {
+.search {
     display: flex;
     flex-direction: row;
 }
 
+.nav-buttons {
+    display: flex;
+    align-items: flex-end;
+}
+
+.upload-container {
+    height: 100%;
+    width: 20%;
+    display: flex;
+    padding-left: 15px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.favourites-container {
+    height: 100%;
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.signout-container {
+    height: 100%;
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
 .search-bar {
-    width: 400px;
+    width: 700px;
     padding: 1rem;
     font-size: 1rem;
     border-radius: 25px;
@@ -28,28 +69,30 @@
     margin: 0.75rem;
 }
 
-.upload {
-    margin: 0.8rem;
-    border: 1px solid #006399;
-    color: white;
-    background-color: #006399;
-    border-radius: 5px;
-}
-
-.nav-bar p {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.flashback-title {
     cursor: pointer;
-    background-color: white;
-    color: #006399;
-    padding: 10px 20px;
-    border: 1px solid #006399;
-    border-radius: 5px;
-    margin: 0.8rem;
-    transition: ease-in;
+    color: white;
+    padding-left: 50px;
+    padding-right: 30px;
+    padding-top: 7px;
+    font-size: 55px;
+    transition: transform .5s;
 }
 
-.nav-bar p:hover {
-    transform: scale(0.95);
+.flashback-title:hover {
+    transform: scale(0.9);
 }
+
+#signout {
+    border-radius: 10px;
+    margin-left: 55px;
+    background-color: white;
+    color:  #420dab;
+    border: 2px solid #4233cc;
+    padding: 10px 16px;
+    transition: transform .5s;
+}
+
+#signout:hover {
+    transform: scale(0.9);
+  }

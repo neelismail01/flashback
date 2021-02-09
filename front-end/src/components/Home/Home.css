@@ -1,12 +1,13 @@
-.feed-container-a {
+.home-page {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 5px;
 }
 
 .feed {
-    width: 85%;
+    width: 98%;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
