@@ -16,7 +16,6 @@ const Home = (props) => {
     }
 
     const handleSearch = search => {
-        console.log('search')
         setEndPoint('search');
         setQuery(search);
     }
@@ -26,7 +25,6 @@ const Home = (props) => {
     }
 
     const handleFeedChange = () => {
-        console.log(feedChanges);
         setFeedChanges(feedChanges + 1);
     }
 
@@ -65,7 +63,13 @@ const Home = (props) => {
                     {
                         imgUrls.length === 0
                         ?
-                        <p>Upload your first memory!</p>
+                        (
+                            endPoint === 'home'
+                            ?
+                            <p className="no-results">Upload your first memory!</p>
+                            :
+                            <p className="no-results">You don't have any favourite memories yet!</p>
+                        )
                         :
                         imgUrls.map((imgUrl, index) => {
                             return <Feed imgUrl={imgUrl} key={index} onFeedChange={handleFeedChange} onSearch={handleSearch} />
