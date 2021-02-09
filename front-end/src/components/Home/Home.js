@@ -7,34 +7,34 @@ import './Home.css';
 const Home = (props) => {
     const [imgUrls, setImgUrls] = useState([]);
     const [query, setQuery] = useState('');
-    const [endPoint, setEndPoint] = useState('home')
+    const [endPoint, setEndPoint] = useState('home');
+    const [feedChanges, setFeedChanges] = useState(0);
 
     const handleHome = () => {
-        console.log('home');
         setEndPoint('home');
     }
 
     const handleSearch = search => {
-        console.log('search');
         setEndPoint('search');
         setQuery(search);
     }
 
     const handleFavourite = () => {
-        console.log('favourites');
         setEndPoint('favourites');
     }
 
+    const handleFeedChange = () => {
+        console.log(feedChanges);
+        setFeedChanges(feedChanges + 1);
+    }
+
     useEffect(() => {
-        console.log(endPoint);
-        console.log(query);
-        console.log()
-        axios.get(`http://localhost:5000/${endPoint}/${props.userId}`, { params: {query: query} })
+        axios.get(`http://localhost:5000/${endPoint}/${props.userId}?search=${query}`)
         .then(response => {
             setImgUrls(response.data);
         })
         .catch(err => console.log(err));
-    }, [endPoint, query])
+    }, [endPoint, query, feedChanges])
 
     return (
         <div className="home-page">
@@ -44,6 +44,7 @@ const Home = (props) => {
                 onFavourite={handleFavourite}
                 onSearch={handleSearch}
                 onSignout={props.onSignOut}
+                onFeedChange={handleFeedChange}
             />
             <div className="feed">
                 {
@@ -52,7 +53,7 @@ const Home = (props) => {
                     <p>Upload your first memory!</p>
                     :
                     imgUrls.map((imgUrl, index) => {
-                        return <Feed imgUrl={imgUrl} key={index} />
+                        return <Feed imgUrl={imgUrl} key={index} onFeedChange={handleFeedChange} />
                     })
                 }
             </div>

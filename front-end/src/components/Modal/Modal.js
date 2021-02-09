@@ -33,7 +33,6 @@ const Modal = (props) => {
     }
 
     const resetFields = () => {
-
         setFile('');
         setFileSelected(false);
         setWho('');
@@ -55,9 +54,9 @@ const Modal = (props) => {
             axios.post('http://localhost:5000/post', data)
             .then(res => {
                 setFileSelected(false);
-                props.closeModal();
                 resetFields();
-                console.log(res.statusText);
+                props.closeModal();
+                props.onFeedChange();
             })
             .catch(err => {
                 console.log(err);

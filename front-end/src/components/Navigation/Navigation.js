@@ -49,7 +49,7 @@ const Navigation = (props) => {
                         <div className="upload-container">
                             <img src={Upload} id="upload" height="40%" width="60%" onClick={openModal} />
                         </div>
-                        <Modal showModal={showModal} closeModal={closeModal} userId={props.userId} />
+                        <Modal onFeedChange={props.onFeedChange} showModal={showModal} closeModal={closeModal} userId={props.userId} />
                         <div className="favourites-container">
                             <img src={emptyheart} height="50%" width="50%" onClick={() => props.onFavourite()} />
                         </div>

@@ -44,7 +44,7 @@ const ImageModal = (props) => {
         console.log('here');
         axios.delete(`http://localhost:5000/delete/${props.imgUrl.substring(30)}`)
         .then(response => {
-            console.log(response);
+            props.onFeedChange();
             props.closeModal();
         })
         .catch(err => console.log(err));
@@ -74,7 +74,7 @@ const ImageModal = (props) => {
                                 ?
                                 <EditModal closeEdit={closeEdit} imgUrl={props.imgUrl} />
                                 :
-                                <TagModal favourite={favourite} imgUrl={props.imgUrl} handleEdit={handleEdit} />
+                                <TagModal favourite={favourite} imgUrl={props.imgUrl} handleEdit={handleEdit} onFeedChange={props.onFeedChange} />
                             }
                         <div className="delete">
                             <p className="delete-btn" onClick={handleDelete}>Delete</p>

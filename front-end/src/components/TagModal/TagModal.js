@@ -17,6 +17,9 @@ const TagModal = (props) => {
         event.preventDefault();
         axios.put(`http://localhost:5000/favourite/${props.imgUrl.substring(30)}`, {favourite: !favourite})
         .then(res => {
+            if (favourite) {
+                props.onFeedChange();
+            }
             setFavourite(!favourite)
         })
         .catch(err => {

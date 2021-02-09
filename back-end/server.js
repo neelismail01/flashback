@@ -247,8 +247,7 @@ const getImgUrl = (postId) => {
 }
 
 app.get('/search/:id', async (req, res) => {
-    console.log(req.params.query)
-    const query = req.params.query.split(" ");
+    const query = req.query.search.split(" ");
     const searchResults = [];
 
     for (const term of query) {
