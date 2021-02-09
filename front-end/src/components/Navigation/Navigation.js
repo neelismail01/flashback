@@ -58,7 +58,7 @@ const Navigation = (props) => {
                                 id="signout"
                                 value="Sign Out"
                                 type="button"
-                                onClick={() => props.onSignOut('signout')}
+                                onClick={() => props.onSignout('signout')}
                             />
                         </div>
                     </div>

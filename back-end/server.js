@@ -23,12 +23,15 @@ app.use('/', express.static(path.join(__dirname, '/public')));
 app.post('/signin', (req, res) => {
     const {username, password} = req.body;
 
+    if (username === '' || password === '') {
+        return res.status(400).send("Empty field(s)");
+    }
+
     knex('users').where({
         user_name: username
     })
     .select('user_id', 'password')
     .then(rows => {
-        console.log(rows)
         bcrypt.compare(password, rows[0].password)
         .then(response => {
             if (response) {

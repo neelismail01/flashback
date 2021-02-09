@@ -85,7 +85,7 @@ const Modal = (props) => {
                                 ?
                                 <p>{file.name}</p>
                                 :
-                                <p>File Not Selected</p>
+                                <p id="no-file">File Not Selected</p>
                             }
                         </div>
                         <div className="detail-inputs">
