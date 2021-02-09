@@ -20,7 +20,7 @@ const Sidebar = (props) => {
                             <img className="icon" src={emptyheart} alt="icon" />
                             <div>Favourites</div>
                         </div>
-                        <div className="sidebar-item">
+                        <div className="sidebar-item" onClick={() => props.onMemoryLane()}>
                             <img className="icon" src={memorylane} alt="icon" />
                             <div>Memory Lane</div>
                         </div>
@@ -40,7 +40,7 @@ const Sidebar = (props) => {
                                 <img className="icon" src={emptyheart} alt="icon" />
                                 <div>Favourites</div>
                             </div>
-                            <div className="sidebar-item">
+                            <div className="sidebar-item" onClick={() => props.onMemoryLane()}>
                                 <img className="icon" src={memorylane} alt="icon" />
                                 <div>Memory Lane</div>
                             </div>
@@ -48,6 +48,8 @@ const Sidebar = (props) => {
                     )
                     :
                     (
+                        props.currentPage === 'random'
+                        ?
                         <div>
                             <div className="sidebar-item" onClick={() => props.onHome()}>
                                 <img className="icon" src={recent} alt="icon" />
@@ -57,7 +59,22 @@ const Sidebar = (props) => {
                                 <img className="icon" src={emptyheart} alt="icon" />
                                 <div>Favourites</div>
                             </div>
-                            <div className="sidebar-item-current">
+                            <div className="sidebar-item-current" onClick={() => props.onMemoryLane()}>
+                                <img className="icon" src={memorylane} alt="icon" />
+                                <div>Memory Lane</div>
+                            </div>
+                        </div>
+                        :
+                        <div>
+                            <div className="sidebar-item" onClick={() => props.onHome()}>
+                                <img className="icon" src={recent} alt="icon" />
+                                <div>Most Recent</div>
+                            </div>
+                            <div className="sidebar-item" onClick={() => props.onFavourite()}>
+                                <img className="icon" src={emptyheart} alt="icon" />
+                                <div>Favourites</div>
+                            </div>
+                            <div className="sidebar-item" onClick={() => props.onMemoryLane()}>
                                 <img className="icon" src={memorylane} alt="icon" />
                                 <div>Memory Lane</div>
                             </div>

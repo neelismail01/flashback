@@ -28,6 +28,10 @@ const Home = (props) => {
         setFeedChanges(feedChanges + 1);
     }
 
+    const handleMemoryLane = () => {
+        setEndPoint('random');
+    }
+
     useEffect(() => {
         let mounted = true;
         axios.get(`http://localhost:5000/${endPoint}/${props.userId}?search=${query}`)
@@ -52,10 +56,11 @@ const Home = (props) => {
             <div className="sidebar-feed">
                 <div className="sidebar">
                     <Sidebar
+                        currentPage={endPoint}
+                        onFeedChange={handleFeedChange}
                         onHome={handleHome}
                         onFavourite={handleFavourite}
-                        onFeedChange={handleFeedChange}
-                        currentPage={endPoint}
+                        onMemoryLane={handleMemoryLane}
                         onSignout={props.onSignOut}
                     />
                 </div>
@@ -68,7 +73,7 @@ const Home = (props) => {
                             ?
                             <p className="no-results">Upload your first memory!</p>
                             :
-                            <p className="no-results">You don't have any favourite memories yet!</p>
+                            <p className="no-results">You don't have any favourite memories yet.</p>
                         )
                         :
                         imgUrls.map((imgUrl, index) => {

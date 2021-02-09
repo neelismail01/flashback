@@ -35,7 +35,9 @@
     justify-content: center;
     align-items: center;
     border: 1px solid #420dab;
+    background-color: white;
     border-radius: 10px;
     padding: 10px;
     margin-top: 10px;
+    width: 40%;
 }
