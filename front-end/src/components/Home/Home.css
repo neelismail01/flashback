@@ -5,9 +5,25 @@
     align-items: center;
 }
 
-.feed {
-    width: 98%;
+.sidebar-feed {
+    width: 100%;
     display: flex;
-    justify-content: flex-start;
+    flex-direction: row;
+}
+
+.sidebar {
+    width: 20%;
+    height: 90vh;
+    background-color: #f9f0ff;
+}
+
+.feed {
+    width: 80%;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
     flex-wrap: wrap;
+    background-color: white;
+    overflow-x: hidden;
+    overflow-y: auto;
 }

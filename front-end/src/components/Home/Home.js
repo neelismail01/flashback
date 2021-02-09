@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navigation from '../Navigation/Navigation';
+import Sidebar from '../Sidebar/Sidebar';
 import Feed from '../Feed/Feed';
 import './Home.css';
 
@@ -47,21 +48,30 @@ const Home = (props) => {
             <Navigation
                 userId={props.userId}
                 onHome={handleHome}
-                onFavourite={handleFavourite}
                 onSearch={handleSearch}
-                onSignout={props.onSignOut}
                 onFeedChange={handleFeedChange}
             />
-            <div className="feed">
-                {
-                    imgUrls.length === 0
-                    ?
-                    <p>Upload your first memory!</p>
-                    :
-                    imgUrls.map((imgUrl, index) => {
-                        return <Feed imgUrl={imgUrl} key={index} onFeedChange={handleFeedChange} onSearch={handleSearch} />
-                    })
-                }
+            <div className="sidebar-feed">
+                <div className="sidebar">
+                    <Sidebar
+                        onHome={handleHome}
+                        onFavourite={handleFavourite}
+                        onFeedChange={handleFeedChange}
+                        currentPage={endPoint}
+                        onSignout={props.onSignOut}
+                    />
+                </div>
+                <div className="feed">
+                    {
+                        imgUrls.length === 0
+                        ?
+                        <p>Upload your first memory!</p>
+                        :
+                        imgUrls.map((imgUrl, index) => {
+                            return <Feed imgUrl={imgUrl} key={index} onFeedChange={handleFeedChange} onSearch={handleSearch} />
+                        })
+                    }
+                </div>
             </div>
         </div>
     );
