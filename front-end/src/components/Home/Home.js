@@ -30,19 +30,16 @@ const Home = (props) => {
 
     const handleMemoryLane = () => {
         setEndPoint('random');
+        handleFeedChange();
     }
 
     useEffect(() => {
-        let mounted = true;
         axios.get(`http://localhost:5000/${endPoint}/${props.userId}?search=${query}`)
         .then(response => {
-            if (mounted) {
-                setImgUrls(response.data);
-            }
+            setImgUrls(response.data);
         })
         .catch(err => console.log(err));
 
-        return () => mounted = false;
     }, [endPoint, query, feedChanges])
 
     return (

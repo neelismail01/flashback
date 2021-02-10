@@ -7,6 +7,19 @@
     width: 100%;
 }
 
+.logo-container {
+    padding-left: 10px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
+
 .search-upload {
     display: flex;
     flex-direction: row;

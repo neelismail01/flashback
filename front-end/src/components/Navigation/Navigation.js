@@ -30,6 +30,9 @@ const Navigation = (props) => {
 
     return (
         <div className="nav-bar-container">
+            <div className="logo-container">
+                <div className="logo" onClick={() => props.onHome()}>Flashback</div>
+            </div>
             <div className="search-upload">
                 <input
                     type="text"
