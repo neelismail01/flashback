@@ -56,7 +56,7 @@ const ImageModal = (props) => {
                 <div className="close-container">
                     <input
                         type="button"
-                        value="X"
+                        value="x"
                         className="upload-close"
                         onClick={closeModal}
                     />
