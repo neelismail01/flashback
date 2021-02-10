@@ -20,6 +20,17 @@ const ImageModal = (props) => {
         setEditVisible(false);
     }
 
+    const handleDelete = event => {
+        event.preventDefault();
+        console.log('here');
+        axios.delete(`http://localhost:5000/delete/${props.imgUrl.substring(30)}`)
+        .then(response => {
+            props.onFeedChange();
+            closeModal();
+        })
+        .catch(err => console.log(err));
+    }
+
     useEffect(() => {
         axios.get(`http://localhost:5000/details/${props.imgUrl.substring(30)}`)
         .then(response => {
@@ -30,29 +41,13 @@ const ImageModal = (props) => {
 
     const handleLove = (event) => {
         event.preventDefault();
-        let mounted = true;
-        if (mounted) {
-            axios.put(`http://localhost:5000/favourite/${props.imgUrl.substring(30)}`, {favourite: !favourite})
-            .then(res => {
-                setFavourite(!favourite)
-            })
-            .catch(err => {
-                console.log(err);
-            })
-        }
-
-        return () => mounted = false;
-    }
-
-    const handleDelete = event => {
-        event.preventDefault();
-        console.log('here');
-        axios.delete(`http://localhost:5000/delete/${props.imgUrl.substring(30)}`)
-        .then(response => {
-            props.onFeedChange();
-            props.closeModal();
+        axios.put(`http://localhost:5000/favourite/${props.imgUrl.substring(30)}`, {favourite: !favourite})
+        .then(res => {
+            setFavourite(!favourite)
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            console.log(err);
+        })
     }
 
     if (props.showModal) {
@@ -60,38 +55,39 @@ const ImageModal = (props) => {
             <div className="modal">
                 <div className="image-modal-card">
                     <img 
-                    onDoubleClick={handleLove}
-                    className="modal-image"
-                    style={{width: '50%', height: '100%', objectFit: 'contain'}}
-                    alt="post"
-                    src={props.imgUrl} />
-                    <div className="details-container">
-                        <div className="close-container">
-                            <input
-                                type="button"
-                                value="X"
-                                className="upload-close"
-                                onClick={closeModal}
-                            />
-                        </div>
-                            {
-                                editVisible
-                                ?
-                                <EditModal closeEdit={closeEdit} imgUrl={props.imgUrl} />
-                                :
-                                <TagModal
-                                    favourite={favourite}
-                                    imgUrl={props.imgUrl}
-                                    handleEdit={handleEdit}
-                                    onFeedChange={props.onFeedChange}
-                                    onSearch={props.onSearch}
-                                    closeModal={props.closeModal}
-                                />
-                            }
-                        <div className="delete">
-                            <p className="delete-btn" onClick={handleDelete}>Delete</p>
-                        </div>
-                    </div>
+                        onDoubleClick={handleLove}
+                        className="modal-image"
+                        style={{width: '66%', height: '100%', objectFit: 'contain'}}
+                        alt="post"
+                        src={props.imgUrl}
+                    />
+                    {
+                        editVisible
+                        ?
+                        <EditModal
+                            closeEdit={closeEdit}
+                            onDelete={handleDelete}
+                            imgUrl={props.imgUrl}
+                        />
+                        :
+                        <TagModal
+                            favourite={favourite}
+                            imgUrl={props.imgUrl}
+                            handleEdit={handleEdit}
+                            onDelete={handleDelete}
+                            onFeedChange={props.onFeedChange}
+                            onSearch={props.onSearch}
+                            closeModal={props.closeModal}
+                        />
+                    }
+                </div>
+                <div className="close-container">
+                    <input
+                        type="button"
+                        value="asdfadsjfdisadsjfdklsa;"
+                        className="upload-close"
+                        onClick={closeModal}
+                    />
                 </div>
             </div>
         );
