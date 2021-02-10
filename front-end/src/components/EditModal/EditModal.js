@@ -68,26 +68,22 @@ const EditModal = (props) => {
             {
             loaded
             ?
-            <div className="details">
-                <div className="who-where">
-                    <div className="detail-wrapper">
-                        <div className="intro">Tagged</div>
-                        <input type="text" placeholder={who} className="value" name="who" onChange={handleDetails} />
-                    </div>
-                    <div className="detail-wrapper">
-                        <div className="intro">Where</div>
-                        <input type="text" placeholder={where} className="value" name="where" onChange={handleDetails} />
-                    </div>
+            <div className="body">
+                <div className="detail-wrapper">
+                    <div className="intro">Tagged</div>
+                    <input type="text" placeholder={who} className="value-edit" name="who" onChange={handleDetails} />
                 </div>
-                <div className="when-what">
-                    <div className="detail-wrapper">
-                        <div className="intro">When</div>
-                        <input type="text" placeholder={when} className="value" name="when" onChange={handleDetails} />
-                    </div>
-                    <div className="detail-wrapper">
-                        <div className="intro">What</div>
-                        <input type="text" placeholder={what} className="value" name="what" onChange={handleDetails} />
-                    </div>
+                <div className="detail-wrapper">
+                    <div className="intro">Where</div>
+                    <input type="text" placeholder={where} className="value-edit" name="where" onChange={handleDetails} />
+                </div>
+                <div className="detail-wrapper">
+                    <div className="intro">When</div>
+                    <input type="text" placeholder={when} className="value-edit" name="when" onChange={handleDetails} />
+                </div>
+                <div className="detail-wrapper">
+                    <div className="intro">What</div>
+                    <input type="text" placeholder={what} className="value-edit" name="what" onChange={handleDetails} />
                 </div>
             </div>
             :

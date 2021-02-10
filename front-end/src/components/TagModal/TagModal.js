@@ -59,26 +59,22 @@ const TagModal = (props) => {
             {
             loaded
             ?
-            <div className="details">
-                <div className="who-where">
-                    <div className="detail-wrapper">
-                        <div className="intro">Tagged</div>
-                        <div onClick={() => handleClick('who')} value="who" className="value">{who}</div>
-                    </div>
-                    <div className="detail-wrapper">
-                        <div className="intro">Where</div>
-                        <div onClick={() => handleClick('where')} value="where" className="value">{where}</div>
-                    </div>
+            <div className="body">
+                <div className="detail-wrapper">
+                    <div className="intro">Tagged</div>
+                    <div onClick={() => handleClick('who')} value="who" className="value">{who}</div>
                 </div>
-                <div className="when-what">
-                    <div className="detail-wrapper">
-                        <div className="intro">When</div>
-                        <div onClick={() => handleClick('when')} value="when" className="value">{when}</div>
-                    </div>
-                    <div className="detail-wrapper">
-                        <div className="intro">What</div>
-                        <div onClick={() => handleClick('what')} value="what" className="value">{what}</div>
-                    </div>
+                <div className="detail-wrapper">
+                    <div className="intro">Where</div>
+                    <div onClick={() => handleClick('where')} value="where" className="value">{where}</div>
+                </div>
+                <div className="detail-wrapper">
+                    <div className="intro">When</div>
+                    <div onClick={() => handleClick('when')} value="when" className="value">{when}</div>
+                </div>
+                <div className="detail-wrapper">
+                    <div className="intro">What</div>
+                    <div onClick={() => handleClick('what')} value="what" className="value">{what}</div>
                 </div>
             </div>
             :
