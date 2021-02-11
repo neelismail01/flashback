@@ -82,8 +82,13 @@ const Home = (props) => {
                         :
                         imgUrls.map((imgUrl, index) => {
                             return (
-                                <LazyLoad key={index} placeholder="..." height={200} offset={100}>
-                                    <Feed imgUrl={imgUrl} key={index} onFeedChange={handleFeedChange} onSearch={handleSearch} />
+                                <LazyLoad height={200} offset={100}>
+                                    <Feed
+                                        imgUrl={imgUrl}
+                                        key={index}
+                                        onFeedChange={handleFeedChange}
+                                        onSearch={handleSearch}
+                                    />
                                 </LazyLoad>
                             );
                         })
