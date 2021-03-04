@@ -35,7 +35,7 @@ const Home = (props) => {
     }
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/${endPoint}/${props.userId}?search=${query}`)
+        axios.get(`http://localhost:5000/${endPoint}?search=${query}`, { headers: { 'authorization': localStorage.getItem("token") } })
         .then(response => {
             setImgUrls(response.data);
         })
@@ -46,7 +46,6 @@ const Home = (props) => {
     return (
         <div className="home-page">
             <Navigation
-                userId={props.userId}
                 onHome={handleHome}
                 onSearch={handleSearch}
                 onFeedChange={handleFeedChange}
@@ -82,7 +81,7 @@ const Home = (props) => {
                         :
                         imgUrls.map((imgUrl, index) => {
                             return (
-                                <LazyLoad height={200} offset={100}>
+                                <LazyLoad key={index} height={200} offset={100}>
                                     <Feed
                                         imgUrl={imgUrl}
                                         key={index}

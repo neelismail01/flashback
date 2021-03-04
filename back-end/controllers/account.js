@@ -16,13 +16,12 @@ const handleSignin = (req, res, knex, bcrypt, jwt) => {
         .then(response => {
             if (response) {
                 console.log("Password matched");
-                const user = { email: _email };
+                const user = { id: rows[0].user_id };
                 const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15m' });
 
                 return res.status(200).json({
                     auth: true,
-                    userId: rows[0].user_id,
-                    accessToken: accessToken,
+                    accessToken: accessToken
                 })
             } else {
                 console.log("Password doesn't match")
