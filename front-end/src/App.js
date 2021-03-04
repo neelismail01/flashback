@@ -7,7 +7,7 @@ import './App.css';
 const App = () => {
   const [user, setUser] = useState({id: 2});
   const [url, setUrl] = useState('home');
-  const [isSignedIn, setIsSignedIn] = useState(true);
+  const [isSignedIn, setIsSignedIn] = useState(false);
 
   const handleRouteChange = (route) => {
     if (route === 'signout') {
@@ -19,7 +19,6 @@ const App = () => {
       setUrl('register');
     } else if (route === 'home') {
       setUrl('home');
-      setIsSignedIn(true);
     }
   }
 

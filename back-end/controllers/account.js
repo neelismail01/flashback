@@ -16,22 +16,20 @@ const handleSignin = (req, res, knex, bcrypt, jwt) => {
         .then(response => {
             if (response) {
                 console.log("Password matched");
-                const theUser = { email: _email };
-
-                const generateAccessToken = user => {
-                    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15m' })
-                }
-
-                const accessToken = generateAccessToken(theUser);
-                const refreshToken = jwt.sign(theUser, process.env.REFRESH_TOKEN_SECRET);
+                const user = { email: _email };
+                const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15m' });
 
                 return res.status(200).json({
+                    auth: true,
+                    userId: rows[0].user_id,
                     accessToken: accessToken,
-                    refreshToken: refreshToken
                 })
             } else {
                 console.log("Password doesn't match")
-                return res.status(400).send("Password doesn't match");
+                return res.status(400).json({
+                    auth: false,
+                    message: "Password doesn't match"
+                });
             }
         })
         .catch(err => console.log(err))
