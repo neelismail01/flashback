@@ -91,15 +91,15 @@ const TagModal = (props) => {
                     {
                         favourite
                         ?
-                        <img src={fullheart} className="favourite-icon" style={{height:'35px', width:'35px'}} onClick={handleLove} />
+                        <img src={fullheart} alt="favourite icon" className="favourite-icon" style={{height:'35px', width:'35px'}} onClick={handleLove} />
                         :
-                        <img src={emptyheart} className="favourite-edit-icon" style={{height:'35px', width:'35px'}} onClick={handleLove} />
+                        <img src={emptyheart} alt="not favourite icon" className="favourite-edit-icon" style={{height:'35px', width:'35px'}} onClick={handleLove} />
                     }
                 </div>
                 <div className="edit">
-                    <img src={edit} className="favourite-edit-icon" style={{height:'30px', width:'30px'}} onClick={props.handleEdit} />
+                    <img src={edit} alt="edit icon" className="favourite-edit-icon" style={{height:'30px', width:'30px'}} onClick={props.handleEdit} />
                 </div>
-                <img src={deletePost} className="delete" style={{height:'30px', width:'30px'}} onClick={props.onDelete} />
+                <img src={deletePost} alt="delete icon" className="delete" style={{height:'30px', width:'30px'}} onClick={props.onDelete} />
             </div>
         </div>
     );

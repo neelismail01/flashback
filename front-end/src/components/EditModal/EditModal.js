@@ -45,14 +45,13 @@ const EditModal = (props) => {
     }
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/details/${props.imgUrl.substring(30)}`, { headers: { 'authorization': localStorage.getItem("token") } })
+        axios.get(`http://localhost:5000/details/${imgUrl.substring(30)}`, { headers: { 'authorization': localStorage.getItem("token") } })
         .then(response => {
             setWho(response.data.who);
             setWhere(response.data.location);
             setWhen(response.data.time_of_memory);
             setWhat(response.data.what);
             setLoaded(true);
-            console.log(`${who}, ${what}, ${where}, ${when}`);
         })
         .catch(err => console.log(err));
     }, [])
@@ -96,7 +95,7 @@ const EditModal = (props) => {
                 <div className="confirm">
                     <button className="edit-btn" onClick={handleFormSubmit}>Confirm</button>
                 </div>
-                <img src={deletePost} style={{height:'30px', width:'30px'}} onClick={props.onDelete} />
+                <img src={deletePost} alt="delete button" style={{height:'30px', width:'30px'}} onClick={props.onDelete} />
             </div>
         </div>
     );
