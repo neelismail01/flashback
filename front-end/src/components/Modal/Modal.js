@@ -5,10 +5,10 @@ import './Modal.css';
 const Modal = (props) => {
     const [file, setFile] = useState('Choose File')
     const [fileSelected, setFileSelected] = useState(false);
-    const [who, setWho] = useState();
-    const [where, setWhere] = useState();
-    const [when, setWhen] = useState();
-    const [what, setWhat] = useState();
+    const [who, setWho] = useState('');
+    const [where, setWhere] = useState('');
+    const [when, setWhen] = useState('');
+    const [what, setWhat] = useState('');
     const [error, setError] = useState(null);
 
     const handleFileInput = event => {
@@ -53,13 +53,13 @@ const Modal = (props) => {
         if (fileSelected) {
             axios.post('http://localhost:5000/post', data, { headers: { 'authorization': localStorage.getItem("token") } })
             .then(res => {
-                if (!res.ok) {
-                    setError('Error uploading image. Please make sure you are uploading an image file.')
-                } else {
+                if (res.statusText === "OK") {
                     setFileSelected(false);
                     resetFields();
                     props.closeModal();
                     props.onFeedChange();
+                } else {
+                    setError('Error uploading image. Please make sure you are uploading an image file.')
                 }
             })
             .catch(err => {
