@@ -9,6 +9,7 @@ const Modal = (props) => {
     const [where, setWhere] = useState();
     const [when, setWhen] = useState();
     const [what, setWhat] = useState();
+    const [error, setError] = useState(null);
 
     const handleFileInput = event => {
         event.preventDefault();
@@ -38,6 +39,7 @@ const Modal = (props) => {
         setWhere('');
         setWhen('');
         setWhat('');
+        setError(null);
     }
 
     const handleFormSubmit = event => {
@@ -51,22 +53,26 @@ const Modal = (props) => {
         if (fileSelected) {
             axios.post('http://localhost:5000/post', data, { headers: { 'authorization': localStorage.getItem("token") } })
             .then(res => {
-                setFileSelected(false);
-                resetFields();
-                props.closeModal();
-                props.onFeedChange();
+                if (!res.ok) {
+                    setError('Error uploading image. Please make sure you are uploading an image file.')
+                } else {
+                    setFileSelected(false);
+                    resetFields();
+                    props.closeModal();
+                    props.onFeedChange();
+                }
             })
             .catch(err => {
                 console.log(err);
             })
         }
         else {
-            console.log("No file uploaded");
+            setError("Please select an image.");
         }
     }
 
     const closeModal = event => {
-        setFileSelected(false);
+        resetFields();
         props.closeModal()
     }
 
@@ -94,6 +100,7 @@ const Modal = (props) => {
                             <input className="file-details" type="date" placeholder="When" name="when" onChange={handleDetails} />
                             <input className="file-details" type="text" placeholder="What" name="what" onChange={handleDetails} />
                         </div>
+                        {error && <p className="error">{error}</p>}
                         <button className="submit" onClick={handleFormSubmit}>Add Memory</button>
                     </form>
                     <input
