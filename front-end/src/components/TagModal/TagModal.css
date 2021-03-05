@@ -25,6 +25,8 @@
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .tag-detail-wrapper {
