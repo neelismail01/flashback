@@ -5,27 +5,18 @@ const bcrypt = require('bcrypt')
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 
-const account = require('./controllers/account');
+const accountRoutes = require('./controllers/account');
 const favourites = require('./controllers/favourites');
 const upload = require('./controllers/upload');
 const home = require('./controllers/home');
 const modal = require('./controllers/modal');
 const search = require('./controllers/search');
 
-const knex = require('knex')({
-    client: 'pg',
-    connection: {
-        host: '127.0.0.1',
-        user: '',
-        password: '',
-        port: '5432',
-        database: 'yourspace'
-    }
-});
-
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+
+app.use('/', express.static(path.join(__dirname, '/public')));
 
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
@@ -45,7 +36,7 @@ const authenticateToken = (req, res, next) => {
     })
 }
 
-app.use('/', express.static(path.join(__dirname, '/public')));
+app.use('/account', accountRoutes);
 
 //User sign in authentication
 app.post('/signin', (req, res) => {account.handleSignin(req, res, knex, bcrypt, jwt)})
