@@ -1,22 +1,17 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
-const bcrypt = require('bcrypt')
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 
 const accountRoutes = require('./controllers/account');
-const favourites = require('./controllers/favourites');
-const upload = require('./controllers/upload');
-const home = require('./controllers/home');
-const modal = require('./controllers/modal');
-const search = require('./controllers/search');
+const photoRoutes = require('./controllers/photos');
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-app.use('/', express.static(path.join(__dirname, '/public')));
+app.use('/public/uploads', express.static(path.join(__dirname, '/public/uploads')));
 
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
@@ -37,37 +32,6 @@ const authenticateToken = (req, res, next) => {
 }
 
 app.use('/account', accountRoutes);
-
-//User sign in authentication
-app.post('/signin', (req, res) => {account.handleSignin(req, res, knex, bcrypt, jwt)})
-
-//User registration and authentication
-app.post('/register', (req, res) => {account.handleRegister(req, res, knex, bcrypt)})
-
-//Upload photo to user photo repository
-app.post('/post', authenticateToken, (req, res) => {upload.handleUpload(req, res, knex)})
-
-//Setting image as a favourite on double click or heart icon
-app.put('/favourite/:imgurl', authenticateToken, (req, res) => {favourites.handleLove(req, res, knex)})
-
-//Getting photos for home feed
-app.get('/home', authenticateToken, (req, res) => {home.homeFeed(req, res, knex)})
-
-//Getting details for image modal tags
-app.get('/details/:imgUrl', authenticateToken, (req, res) => {modal.tagDetails(req, res, knex)})
-
-//Getting photos for favourites feed
-app.get('/favourites', authenticateToken, (req, res) => {favourites.favouritesFeed(req, res, knex)})
-
-//Updating image modal tag details with user input
-app.put('/edit', authenticateToken, (req, res) => {modal.handleEdit(req, res, knex)})
-
-//Deleting photo from user repository
-app.delete('/delete/:imgUrl', authenticateToken, (req, res) => {modal.handleDelete(req, res, knex)})
-
-//Setting home feed based on search results
-app.get('/search', authenticateToken, (req, res) => {search.handleSearch(req, res, knex)})
-
-app.get('/random', authenticateToken, (req, res) => {search.handleRandom(req, res, knex)})
+app.use('/photos', authenticateToken, photoRoutes);
 
 app.listen(5000, () => console.log(`Server listening on Port 5000`));
